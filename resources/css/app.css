@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.active {
+    background-color: white;
+    color: black;
+}
+
+.active:hover {
+    /* Hiệu ứng khi hover */
+    background-color: lightgray;
+    color: black;
+}
