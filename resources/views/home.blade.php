@@ -17,7 +17,7 @@
             }
 
             a.pulse {
-                animation: pulse 2s infinite;
+                animation: pulse 1s infinite;
             }
         </style>
         <div class="w-full sm:w-[960px] mx-auto grid sm:grid-cols-2">
@@ -51,11 +51,14 @@
                         <option value="Website">Website</option>
                     </select>
                     <div class="flex justify-between mt-3">
-                        <button class="bg-[#962805] px-3 py-4 text-white font-bold text-[15px]" type="submit">
+                        <button class="bg-[#962805] px-3 py-4 text-white font-bold text-[17px]" type="submit">
                             Kích hoạt bảo hành ngay
                         </button>
-                        <a href="https://www.messenger.com/t/gochekvietnamofficial" class="bg-white px-3 py-4 text-[rgb(23, 23, 23)] font-bold text-[15px] rounded-full" target="_blank">
+                        <a href="https://www.messenger.com/t/gochekvietnamofficial"
+                        class="bg-white px-3 py-4 text-[rgb(23, 23, 23)] font-bold text-[17px] rounded-full pulse flex items-center justify-between"
+                        target="_blank">
                             Liên Hệ Ngay
+                            <img src="https://w.ladicdn.com/ladiui/icons/social/messenger.svg" class="ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
                         </a>
                     </div>
                 </form>
