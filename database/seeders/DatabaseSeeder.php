@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
 {
     private array $warrantNames = [
         'AA' => 'Micro thu âm Gochek Ultra Đơn, không hộp sạc TYPE-C',
-        'AB' => 'Micro thu âm Gochek Ultra Đơn, không hộp sạc Lightning',   
+        'AB' => 'Micro thu âm Gochek Ultra Đơn, không hộp sạc Lightning',
         'AC' => 'Micro thu âm Gochek Ultra Đôi, không hộp sạc TYPE-C',
         'AD' => 'Micro thu âm Gochek Ultra Đôi, không hộp sạc Lightning',
         'AE' => 'Micro thu âm Gochek Ultra Đơn, có hộp sạc TYPE-C',

@@ -1,9 +1,9 @@
 @extends('layout')
 
 @section('content')
-    <div class="w-full bg-background py-20 flex">
+    <div class="w-full bg-background md:py-10 lg:py-20 flex">
         <div class="w-[680px] mx-auto  flex flex-col justify-between items-center bg-white text-lg p-4 rounded-xl">
-            <div class="text-[40px] font-bold py-5">
+            <div class="text-[30px] md:text-[40px] font-bold py-5">
                 KẾT QUẢ TRA CỨU
             </div>
             @foreach($warranties as $warranty)
