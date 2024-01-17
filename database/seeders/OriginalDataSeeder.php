@@ -26,6 +26,9 @@ class OriginalDataSeeder extends Seeder
             }
             // Get the first two characters of the code
             $type = WarrantyType::where('code', substr($line[3], 0, 2))->first();
+            if (!$type) {
+                continue;
+            }
 
             // Create the warranty
             Warranty::updateOrCreate(
