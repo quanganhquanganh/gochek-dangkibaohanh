@@ -16,6 +16,7 @@
                 Quý khách có thể tra cứu thời hạn bảo hành tại
                 <a
                     class="underline cursor-pointer text-blue-700 hover:text-blue-900"
+                    href="{{route('search')}}"
                 >Tra cứu bảo hành</a>
             </div>
         </div>

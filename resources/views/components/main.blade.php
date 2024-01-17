@@ -1,6 +1,6 @@
 {{--Main Form--}}
 <div class="w-full bg-background text-white ">
-    <div class="w-[960px] mx-auto grid grid-cols-2">
+    <div class="w-full sm:w-[960px] mx-auto grid grid-cols-2">
         <div class="row-span-1">
             <div class="text-[40px] font-bold py-10 text-left">
                 KÍCH HOẠT
@@ -39,18 +39,30 @@
 {{--End Main Form--}}
 
 {{--Tutorial Box--}}
-<div class="w-full bg-white text-black">
-    <div class="w-[960px] mx-auto flex flex-col items-center">
-        <div class="text-[35px] font-bold pt-5 pb-3 text-center">
-            VỊ TRÍ MÃ BẢO HÀNH
-        </div>
-        <div class="w-1/5 border-b border-dashed border-[#36383f] mb-4"></div>
-        <span class="font-bold text-[22px]">
+    <div class="w-full bg-white text-black">
+        <div class="w-full sm:w-[960px] mx-auto flex flex-col items-center">
+            <div class="text-[20px] sm:text-[35px] font-bold pt-5 pb-3 text-center">
+                VỊ TRÍ MÃ BẢO HÀNH
+            </div>
+            <div class="w-1/5 border-b border-dashed border-[#36383f] mb-4"></div>
+            <span class="font-bold text-[22px]">
             Mã bảo hành được in trên Thẻ bảo hành
         </span>
         <span class="text-[14px]">
             (Mỗi một sản phẩm có một mã bảo hành riêng)
         </span>
+        <div class="mt-10 mb-10 flex justify-around relative"> <!-- Add relative here -->
+            <div id="rectangle-box" 
+                class="absolute top-[85%] left-[65%] w-[28%] h-[10%] border-2 border-solid border-red-700">
+            </div>
+            <div id="IMAGE504"
+                class="w-[420.752px] h-[240.155px]
+                bg-no-repeat bg-top bg-cover bg-scroll bg-content-box
+                pointer-events-none"
+                style="background-image: url('https://w.ladicdn.com/s750x550/5ac37fb5e9cb7e9e17437a81/the-bao-hanh-3-20230906021458-9bxxo.png');">
+            </div>
+        </div>
+    </div> 
+        </div>
     </div>
-</div>
 {{--End Tutorial Box--}}

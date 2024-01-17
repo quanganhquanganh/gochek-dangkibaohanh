@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" sizes="16x16">
+    <title>Bảo Hành Điện Tử Gochek</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -830,16 +831,19 @@
             }
         }
     </style>
+
+    <!-- Packages -->
+
     @vite('resources/css/app.css')
 </head>
 
 <body class="antialiased">
-<div class="w-full min-h-screen">
-    @include('components.header')
-    @include('components.tab')
-    @yield('content')
-    @include('components.footer')
-</div>
+    <div class="w-full min-h-screen">
+        @include('components.header')
+        @include('components.tab')
+        @yield('content')
+        @include('components.footer')
+    </div>
 </body>
 
 </html>

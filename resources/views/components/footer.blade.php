@@ -1,6 +1,6 @@
 {{--Footer--}}
 <div class="w-full bg-background">
-    <div class="w-[960px] mx-auto flex flex-col  items-start text-white text-lg pt-10">
+    <div class="w-full sm:w-[960px] mx-auto flex flex-col  items-start text-white text-lg pt-10">
         <div class="">
             <img src="{{ asset('text-logo.png') }}" class="w-[150px] mx-auto">
         </div>

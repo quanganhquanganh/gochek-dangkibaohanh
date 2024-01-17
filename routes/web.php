@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WarrantyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,13 @@ Route::get('/', function () {
     return view('home'); // Trả về view home.blade.php
 })->name('home');
 
-Route::get('/dangkybaohanhthanhcong', function () {
-    return view('success'); // Trả về view success.blade.php
-})->name('success');
+Route::get('/search', function () {
+    return view('search'); // Trả về view search.blade.php
+})->name('search');
 
+Route::post('/warranty-check', [WarrantyController::class, 'store'])->name('warranty-check');
 
+Route::post('/warranty-search', [WarrantyController::class, 'search'])->name('warranty-search');
 
 Route::get('/oauth/login', function () {
     $apiVersion = '2.0';
