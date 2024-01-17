@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
                 [
                     'name' => $name,
                     'duration' => $this->warrantyDurations[$code],
-                    'keywords' => $this->warrantyKeywords[$code],
+                    'keywords' => json_encode($this->warrantyKeywords[$code]),
                 ]
             );
         }

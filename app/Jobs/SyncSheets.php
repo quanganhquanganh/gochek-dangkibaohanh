@@ -42,13 +42,24 @@ class SyncSheets implements ShouldQueue
 
         for ($i = 0; $i < $sheetCount; $i++) {
             $sheet = $spreadsheet->getSheet($i);
-            $highestRow = $sheet->getHighestRow();
-            $highestColumn = $sheet->getHighestColumn();
-        
-            for ($row = 1; $row <= $highestRow; $row++) {
-                for ($col = 'A'; $col <= $highestColumn; $col++) {
-                    $cell = $sheet->getCell($col . $row);
-                    $value = $cell->getCalculatedValue();
+            $maxCell = $sheet->getHighestRowAndColumn();
+
+            Log::info([$sheet->getTitle(), $maxCell['row'], $maxCell['column']]);
+
+            $data = $sheet->rangeToArray(
+                'A1:' . $maxCell['column'] . $maxCell['row'],
+                null,
+                true,
+                true,
+                true
+            );
+
+            foreach ($data as $row) {
+                foreach ($row as $cell) {
+                    if (empty($cell)) {
+                        continue;
+                    }
+                    $value = $cell;
                     if (preg_match('/^[A-Z]{2}\d{5,}$/', $value)) {
                         // First or create the code, and increment the updated count
                         WarrantyCode::firstOrCreate(['code' => $value])
