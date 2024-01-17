@@ -137,7 +137,8 @@ class WarrantyController extends Controller
         $searchVolumes = WarrantySearchVolume::where('updated_at', '>', $lastUpdated)->get();
         $searchVolumes = $searchVolumes->map(function ($searchVolume) {
             return [
-                'date' => $searchVolume->date,
+                'date' => Carbon::createFromFormat('Y-m-d H:i:s', $searchVolume->date)
+                    ->setTimezone('Asia/Ho_Chi_Minh'),
                 'volume' => $searchVolume->volume,
             ];
         });
