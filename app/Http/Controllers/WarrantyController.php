@@ -100,6 +100,7 @@ class WarrantyController extends Controller
                                         'code' => $item['productCode'],
                                     ],
                                     'created_at' => $order['deliveryDate'],
+                                    'delivery' => true,
                                 ]);
                             }
                         }

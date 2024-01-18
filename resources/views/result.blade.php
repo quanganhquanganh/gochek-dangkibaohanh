@@ -10,7 +10,14 @@
                 <div class="w-full p-4 border-b border-gray-200">
                 <div class="text-lg">Tên sản phẩm: <strong>{{ $warranty['warrantyType']['name'] }}</strong></div>
                 <div class="text-lg">Thời hạn bảo hành: <strong>{{ $warranty['warrantyType']['duration'] }} tháng</strong></div>
-                <div class="text-lg">Ngày kích hoạt: <strong>{{ date('d-m-Y', strtotime($warranty['created_at'])) }}</strong></div>
+                Ngày kích hoạt
+                @if(isset($warranty['delivery']) && $warranty['delivery'])
+                    (nhận hàng)
+                @endif
+                : 
+                    <strong>
+                        {{ date('d-m-Y', strtotime($warranty['created_at'])) }}
+                    </strong>
                 </div>
             @endforeach
         </div>
