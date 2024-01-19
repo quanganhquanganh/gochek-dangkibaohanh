@@ -21,6 +21,10 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Install nodejs and npm
+RUN curl -L https://deb.nodesource.com/nsolid_setup_deb.sh | bash -s -- 16
+RUN apt-get install nodejs -y
+
 # Set working directory
 WORKDIR /var/www
 
