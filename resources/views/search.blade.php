@@ -20,7 +20,7 @@
             <div class="row-span-1 p-5 py mb-12">
                 <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('warranty-search') }}" method="POST">
                     @csrf
-                    <div class="text-white text-lg my-1">Vui lòng điền một trong hai trường dưới đây</div>
+                    <div class="text-white text-lg my-1">Vui lòng điền một trong hai thông tin dưới đây</div>
                     <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-5 py-3 my-2 bg-white">
                     <input type="text" name="warranty_code" placeholder="Mã bảo hành" class="w-full px-5 py-3 my-2 bg-white">
                     <div class="flex justify-between mt-2 mb-2">

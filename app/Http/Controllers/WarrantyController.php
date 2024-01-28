@@ -37,10 +37,11 @@ class WarrantyController extends Controller
         $warrantyTypeId = WarrantyType::where('code', $warrantyType)->value('id');
 
         if (!$warrantyTypeId) {
-            toastr()->error('Kích hoạt bảo hành không thành công. Quý khách vui lòng kiểm tra lại thông tin.', 'Không hợp lệ');
+            toastr()
+                ->error('Kích hoạt bảo hành không thành công. Quý khách vui lòng kiểm tra lại thông tin.', 'Không hợp lệ');
             return back();
         }
-        
+
         $warrantyCodeId = WarrantyCode::where('code', $validatedData['warranty_code'])->value('id');
         if (Warranty::where('warranty_code_id', $warrantyCodeId)->exists()) {
             toastr()->error('Sản phẩm này đã được kích hoạt bảo hành, để tra cứu thông tin bảo hành, truy cập vào mục “Tra cứu bảo hành”.', 'Không hợp lệ');
@@ -180,7 +181,7 @@ class WarrantyController extends Controller
         $now->second = 0;
         $now->hour = $now->hour - $now->hour % 6;
         // Increment the volume of the current hour
-        $searchVolume = WarrantySearchVolume::where('date', $now)->first(); 
+        $searchVolume = WarrantySearchVolume::where('date', $now)->first();
         if ($searchVolume) {
             $searchVolume->increment('volume');
         } else {

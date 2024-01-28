@@ -1,4 +1,4 @@
-<div class="w-full bg-white text-black">
+<div class="w-full bg-[#f0f2f3] text-black">
   <div class="w-full lg:w-[960px] mx-auto flex flex-col items-center">
       <div class="text-[20px] lg:text-[35px] font-bold pt-5 pb-3 text-center">
           VỊ TRÍ MÃ BẢO HÀNH
@@ -21,7 +21,7 @@
           </div>
       </div>
 
-      <div class="hidden md:flex flex-col items-center relative" id="tutorial-box">
+      <div class="hidden lg:flex flex-col items-center relative" id="tutorial-box">
           <div class="absolute top-[70%] left-[-9%]  w-1/2 rotate-[-25deg] border border-solid border-[#bb3003]"></div>
           <div class="cursor-pointer z-10 mt-24 ml-5 w-[160px] h-[40px] bg-[#f8b349] flex justify-center items-center text-black font-[900] text-[20px]">
               Mã bảo hành
