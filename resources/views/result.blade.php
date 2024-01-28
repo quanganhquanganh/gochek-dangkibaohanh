@@ -1,8 +1,8 @@
 @extends('layout')
 
 @section('content')
-    <div class="w-full bg-background md:py-10 lg:py-20 flex">
-        <div class="w-[680px] mx-auto  flex flex-col justify-between items-center bg-white text-lg p-4 rounded-xl">
+    <div class="w-full bg-background md:pt-10 lg:pt-20 flex flex-col justify-center items-center">
+        <div class="w-full md:w-[680px] mx-auto  flex flex-col justify-between items-center bg-white text-lg p-4 rounded-xl">
             <div class="text-[30px] md:text-[40px] font-bold py-5">
                 KẾT QUẢ TRA CỨU
             </div>
@@ -14,7 +14,7 @@
                 @if(isset($warranty['delivery']) && $warranty['delivery'])
                     (nhận hàng)
                 @endif
-                : 
+                :
                     <strong>
                         {{ date('d-m-Y', strtotime($warranty['created_at'])) }}
                     </strong>

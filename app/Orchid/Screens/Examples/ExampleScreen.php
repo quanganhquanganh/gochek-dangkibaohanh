@@ -2,9 +2,14 @@
 
 namespace App\Orchid\Screens\Examples;
 
+use App\Models\Warranty;
+use App\Models\WarrantyCode;
 use App\Orchid\Layouts\Examples\ChartBarExample;
 use App\Orchid\Layouts\Examples\ChartLineExample;
+use App\Orchid\Layouts\Examples\RegisteBarChart;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\ModalToggle;
@@ -35,29 +40,8 @@ class ExampleScreen extends Screen
     public function query(): iterable
     {
         return [
-            'charts'  => [
-                [
-                    'name'   => 'Some Data',
-                    'values' => [25, 40, 30, 35, 8, 52, 17],
-                    'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
-                ],
-                [
-                    'name'   => 'Another Set',
-                    'values' => [25, 50, -10, 15, 18, 32, 27],
-                    'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
-                ],
-                [
-                    'name'   => 'Yet Another',
-                    'values' => [15, 20, -3, -15, 58, 12, -17],
-                    'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
-                ],
-                [
-                    'name'   => 'And Last',
-                    'values' => [10, 33, -8, -3, 70, 20, -34],
-                    'labels' => ['12am-3am', '3am-6am', '6am-9am', '9am-12pm', '12pm-3pm', '3pm-6pm', '6pm-9pm'],
-                ],
-            ],
-            'table'   => [
+            'charts' => $this->datasetWarrantyRegisterChart(),
+            'table' => [
                 new Repository(['id' => 100, 'name' => self::TEXT_EXAMPLE, 'price' => 10.24, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 200, 'name' => self::TEXT_EXAMPLE, 'price' => 65.9, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 300, 'name' => self::TEXT_EXAMPLE, 'price' => 754.2, 'created_at' => '01.01.2020']),
@@ -66,10 +50,12 @@ class ExampleScreen extends Screen
 
             ],
             'metrics' => [
-                'sales'    => ['value' => number_format(6851), 'diff' => 10.08],
+                'sales' => ['value' => number_format(6851), 'diff' => 10.08],
                 'visitors' => ['value' => number_format(24668), 'diff' => -30.76],
-                'orders'   => ['value' => number_format(10000), 'diff' => 0],
-                'total'    => number_format(65661),
+                'orders' => ['value' => number_format(10000), 'diff' => 0],
+                'total' => number_format(65661),
+                'totalCode' => number_format(WarrantyCode::count()),
+                'totalWarranty' => number_format(Warranty::count()),
             ],
         ];
     }
@@ -79,7 +65,7 @@ class ExampleScreen extends Screen
      */
     public function name(): ?string
     {
-        return 'Example Screen';
+        return 'Thống kê';
     }
 
     /**
@@ -87,7 +73,7 @@ class ExampleScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Sample Screen Components';
+        return 'Các dữ liệu liên quan đến việc tra cứu bảo hành';
     }
 
     /**
@@ -98,15 +84,15 @@ class ExampleScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Button::make('Show toast')
-                ->method('showToast')
-                ->novalidate()
-                ->icon('bs.chat-square-dots'),
+            // Button::make('Show toast')
+            //     ->method('showToast')
+            //     ->novalidate()
+            //     ->icon('bs.chat-square-dots'),
 
-            ModalToggle::make('Launch demo modal')
-                ->modal('exampleModal')
-                ->method('showToast')
-                ->icon('bs.window'),
+            // ModalToggle::make('Launch demo modal')
+            //     ->modal('exampleModal')
+            //     ->method('showToast')
+            //     ->icon('bs.window'),
         ];
     }
 
@@ -119,32 +105,33 @@ class ExampleScreen extends Screen
     {
         return [
             Layout::metrics([
-                'Sales Today'    => 'metrics.sales',
-                'Visitors Today' => 'metrics.visitors',
-                'Pending Orders' => 'metrics.orders',
-                'Total Earnings' => 'metrics.total',
+                'Lượt đăng kí bảo hành hôm nay' => 'metrics.sales',
+                'Lượt truy cập hôm nay' => 'metrics.visitors',
+                'Tổng số mã đã kích hoạt' => 'metrics.totalWarranty',
+                'Tổng số mã bảo hành' => 'metrics.totalCode',
             ]),
-
-            Layout::columns([
-                ChartLineExample::make('charts', 'Line Chart')
-                    ->description('Visualize data trends with multi-colored line graphs.'),
-
-                ChartBarExample::make('charts', 'Bar Chart')
-                    ->description('Compare data sets with colorful bar graphs.'),
-            ]),
+            ChartBarExample::make('charts', 'Biểu đồ lượt đăng kí bảo hành theo tháng')
+                ->description('Thống kê theo 12 tháng gần nhất'),
+//            Layout::columns([
+//                ChartLineExample::make('charts', 'Line Chart')
+//                    ->description('Visualize data trends with multi-colored line graphs.'),
+//
+//                ChartBarExample::make('charts', 'Bar Chart')
+//                    ->description('Compare data sets with colorful bar graphs.'),
+//            ]),
 
             Layout::table('table', [
                 TD::make('id', 'ID')
                     ->width('100')
-                    ->render(fn (Repository $model) => // Please use view('path')
-                    "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
+                    ->render(fn(Repository $model) => // Please use view('path')
+                        "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
                               alt='sample'
                               class='mw-100 d-block img-fluid rounded-1 w-100'>
                             <span class='small text-muted mt-1 mb-0'># {$model->get('id')}</span>"),
 
                 TD::make('name', 'Name')
                     ->width('450')
-                    ->render(fn (Repository $model) => Str::limit($model->get('name'), 200)),
+                    ->render(fn(Repository $model) => Str::limit($model->get('name'), 200)),
 
                 TD::make('price', 'Price')
                     ->width('100')
@@ -171,5 +158,88 @@ class ExampleScreen extends Screen
     public function showToast(Request $request): void
     {
         Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
+    }
+
+    public function datasetWarrantyRegisterChart(): array
+    {
+        $endDate = Carbon::now(); // Ngày hiện tại
+        $startDate = $endDate->copy()->subMonths(11); // Ngày 12 tháng trước
+
+        $labels = [];
+
+        // Tạo danh sách các tháng dưới dạng văn bản
+        while ($startDate <= $endDate) {
+            $labels[] = $startDate->format('m/y'); // 'F Y' lấy tên tháng và năm
+            $startDate->addMonth(); // Tăng tháng lên 1
+        }
+
+        $listName = [
+            'Cửa hàng Đại lý Ủy quyền',
+            'Facebook',
+            'TikTok Shop',
+            'Shopee',
+            'Lazada',
+            'Website',
+            'Khác'
+        ];
+
+        $datasets = [];
+
+        foreach ($listName as $name) {
+            if ($name === 'Khác') {
+                $warrantyData = Warranty::whereNotIn('store', $listName);
+            } else {
+                $warrantyData = Warranty::where('store', $name);
+            }
+            $query =$warrantyData
+                ->whereBetween('created_at', [$endDate->copy()->subMonths(11)->startOfMonth(), $endDate->copy()->endOfMonth()])
+                ->get()
+//                ->each(function ($item) {
+//                    $formattedDate = $item->created_at->format('M/Y');
+//                    Log::info("Original Date: " . $item->created_at . " | Formatted Date: $formattedDate\n");
+//                })
+                ->groupBy(function ($item) {
+                    return $item->created_at->format('m/y');
+                })
+//                ->each(function ($group, $key) {
+//                    Log::info("Group: $key | Count: " . count($group) . "\n");
+//                })
+                ->map(function ($group, $key) {
+                    return [
+                        'name' => $key,
+                        'count' => count($group)
+                    ];
+                })
+                ->values()
+                ->toArray();
+
+            $queryWithZeros = [];
+            foreach ($labels as $month) {
+                $found = false;
+                foreach ($query as $data) {
+                    if ($data['name'] === $month) {
+                        $queryWithZeros[] = $data;
+                        $found = true;
+                        break;
+                    }
+                }
+
+                if (!$found) {
+                    $queryWithZeros[] = [
+                        'name' => $month,
+                        'count' => 0,
+                    ];
+                }
+            }
+
+            $datasets[] = [
+                'name' => $name,
+                'values' => array_column($queryWithZeros, 'count'),
+                'labels' => $labels,
+            ];
+
+
+        }
+        return $datasets;
     }
 }

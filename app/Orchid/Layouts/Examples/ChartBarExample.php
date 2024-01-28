@@ -23,4 +23,6 @@ class ChartBarExample extends Chart
      * @var int
      */
     protected $height = 300;
+
+    protected $title = 'Biểu đồ lượt đăng kí bảo hành theo tháng';
 }
