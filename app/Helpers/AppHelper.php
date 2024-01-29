@@ -4,10 +4,11 @@ namespace App\Helpers;
 use App\Models\Warranty;
 use App\Models\WarrantyType;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class AppHelper
 {
-    public function calculateExpiredAtFromWarranty($warrantyId)
+    public static function calculateExpiredAtFromWarranty($warrantyId)
     {
         $warranty = Warranty::find($warrantyId);
         $warrantyType = $warranty->warrantyType;
@@ -16,10 +17,10 @@ class AppHelper
         $createdAt = $warranty->created_at;
         $duration = $warrantyType->duration;
         $maxExpiredAt = $manufacturingDate->copy()->addMonths(1)->startOfMonth()->addMonths($duration + 4);
-        $expiredAt = $createdAt->addMonths($duration);
+        $expiredAt = $createdAt->copy()->addMonths($duration);
         if ($expiredAt->isFuture() && $expiredAt->lessThan($maxExpiredAt)) {
-            return $expiredAt;
+            return $expiredAt->format('d-m-Y');
         }
-        return $maxExpiredAt;
+        return $maxExpiredAt->format('d-m-Y');
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\WarrantyNhanhvnType;
 use Illuminate\Database\Seeder;
 use App\Models\WarrantyType;
 
@@ -86,6 +87,90 @@ class DatabaseSeeder extends Seeder
         'FA' => ['a9'],
     ];
 
+    private array $warrantyNhanhvnTypes = [
+        '2000214247831' => [
+            'name' => 'Adapter GoChek (Củ sạc)',
+            'duration' => 12,
+        ],
+        '2000214247572' => [
+            'name' => 'Micro-GoChek D Ultra Plus',
+            'duration' => 12,
+        ],
+        '2000214247565' => [
+            'name' => 'Micro-GoChek B Ultra Plus',
+            'duration' => 12,
+        ],
+        '2000214247558' => [
+            'name' => 'Micro-GoChek A Ultra Plus',
+            'duration' => 12,
+        ],
+        '2000214247466' => [
+            'name' => 'Gậy chụp ảnh GoChek SS100',
+            'duration' => 12,
+        ],
+        '2000214247459' => [
+            'name' => 'Tai Nghe Bluetooth GoChek SpaceX Màu White',
+            'duration' => 12,
+        ],
+        '2000214247442' => [
+            'name' => 'Tai Nghe Bluetooth GoChek SpaceX Màu Black',
+            'duration' => 12,
+        ],
+        '2000214247435' => [
+            'name' => 'Loa Bluetooth Gochek Stomix Màu Black',
+            'duration' => 6,
+        ],
+        '2000214247428' => [
+            'name' => 'Loa Bluetooth Gochek Stomix Màu Camou',
+            'duration' => 6,
+        ],
+        '2000214247411' => [
+            'name' => 'Loa Bluetooth Gochek Stomix Màu Grey',
+            'duration' => 6,
+        ],
+        '2000214247404' => [
+            'name' => 'Loa Bluetooth Gochek Stomix Màu Blue',
+            'duration' => 6,
+        ],
+        '2000205050297' => [
+            'name' => 'Micro Gochek C02 ultra',
+            'duration' => 12,
+        ],
+        '2000205050259' => [
+            'name' => 'Micro Gochek D02 ultra',
+            'duration' => 12,
+        ],
+        '2000205050242' => [
+            'name' => 'Micro Gochek D01 ultra',
+            'duration' => 12,
+        ],
+        '2000205050150' => [
+            'name' => 'Micro Gochek C01 ultra',
+            'duration' => 12,
+        ],
+        '2000205050136' => [
+            'name' => 'Micro Gochek B02 ultra',
+            'duration' => 12,
+        ],
+        '2000205050112' => [
+            'name' => 'Micro Gochek B01 ultra',
+            'duration' => 12,
+        ],
+        '2000205050105' => [
+            'name' => 'Micro Gochek A02 ultra',
+            'duration' => 12,
+        ],
+        '2000205050044' => [
+            'name' => 'Micro Gochek A01 ultra',
+            'duration' => 12,
+        ],
+        '2000214247787' => [
+            'name' => 'Gimbal GoChek HunteX G5',
+            'duration' => 12,
+        ],
+    ];
+
+
     /**
      * Seed the application's database.
      */
@@ -98,6 +183,16 @@ class DatabaseSeeder extends Seeder
                     'name' => $name,
                     'duration' => $this->warrantyDurations[$code],
                     'keywords' => json_encode($this->warrantyKeywords[$code]),
+                ]
+            );
+        }
+
+        foreach ($this->warrantyNhanhvnTypes as $code => $data) {
+            WarrantyNhanhvnType::updateOrCreate(
+                ['code' => $code],
+                [
+                    'name' => $data['name'],
+                    'duration' => $data['duration'],
                 ]
             );
         }

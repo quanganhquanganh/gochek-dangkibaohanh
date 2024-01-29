@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Resources;
 
+use App\Orchid\Filters\WarrantyFilter;
 use Orchid\Crud\Resource;
 use Orchid\Screen\TD;
 use Orchid\Screen\Sight;
@@ -38,12 +39,13 @@ class WarrantyResource extends Resource
 
             TD::make('name', 'Tên khách hàng')
                 // ->sort()
-                // ->filter(TD::FILTER_TEXT)
+                ->filter(TD::FILTER_TEXT)
                 ->render(function ($model) {
                     return $model->name;
                 }),
 
             TD::make('phone', 'Số điện thoại')
+                ->filter(TD::FILTER_TEXT)
                 ->render(function ($model) {
                     return $model->phone;
                 }),
@@ -54,6 +56,7 @@ class WarrantyResource extends Resource
                 }),
 
             TD::make('warranty_code_id', 'Mã bảo hành')
+                ->filter(TD::FILTER_TEXT)
                 ->render(function ($model) {
                     return $model->warrantyCode->code;
                 }),
@@ -96,7 +99,7 @@ class WarrantyResource extends Resource
                 }),
             Sight::make('expired_at', 'Ngày hết hạn')
                 ->render(function ($model) {
-                    return (new \App\Helpers\AppHelper)->calculateExpiredAtFromWarranty($model->id)->toDateString();
+                    return (new \App\Helpers\AppHelper)->calculateExpiredAtFromWarranty($model->id);
                 }),
         ];
     }
@@ -120,7 +123,7 @@ class WarrantyResource extends Resource
     public function filters(): array
     {
         return [
-            new DefaultSorted('created_at', 'desc')
+            new DefaultSorted('created_at', 'desc'),
         ];
     }
 
@@ -132,5 +135,26 @@ class WarrantyResource extends Resource
     public static function perPage(): int
     {
         return 20;
+    }
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label(): string
+    {
+        return "Danh sách đăng kí bảo hành";
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+
+    public static function singularLabel(): string
+    {
+        return "Đăng kí bảo hành";
     }
 }

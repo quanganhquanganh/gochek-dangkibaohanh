@@ -3,12 +3,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\OrderController;
 use App\Http\Requests\StoreWarrantyRequest;
+use App\Models\WarrantyNhanhvnType;
 use Illuminate\Http\Request;
 use App\Models\Warranty;
 use App\Models\WarrantyType;
 use App\Models\WarrantyCode;
 use App\Models\WarrantySearchVolume;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class WarrantyController extends Controller
 {
@@ -90,20 +92,21 @@ class WarrantyController extends Controller
 
                 foreach ($orders as $order) {
                     foreach ($order['products'] as $item) {
-                        $warrantyType = $this->findWarrantyType($item['productName']);
-                        if ($warrantyType) {
-                            $warrantyType['name'] = $item['productName'];
-                            if (!$warranties->contains('code', $item['productCode'])) {
-                                $warranties->push([
-                                    'code' => $item['productCode'],
-                                    'warrantyType' => collect($warrantyType),
-                                    'warrantyCode' => [
-                                        'code' => $item['productCode'],
-                                    ],
-                                    'created_at' => $order['deliveryDate'],
-                                    'delivery' => true,
-                                ]);
-                            }
+                        $barcode = $item['productBarcode'];
+                        $duration = $this->getDurationOfWarrantyNhanhvnType($barcode);
+                        if ($duration){
+                            $warranties->push([
+                                'code' => $item['productCode'],
+                                'warrantyType' => [
+                                    'duration' => $duration,
+                                    'name' => $item['productName'],
+                                ],
+                                'warrantyCode' => [
+                                    'code' => $barcode,
+                                ],
+                                'created_at' => $order['deliveryDate'],
+                                'delivery' => true,
+                            ]);
                         }
                     }
                 }
@@ -205,34 +208,39 @@ class WarrantyController extends Controller
         return 0;
     }
 
-    private function findWarrantyType(string $input): ?WarrantyType
+//    private function findWarrantyType(string $input): ?WarrantyType
+//    {
+//        $input = strtolower($input); // Convert the input to lowercase
+//        $words = explode(' ', $input); // Split the input into words
+//        $warrantyTypes = []; // Array of warranty types
+//
+//        foreach ($words as $word) {
+//            $warrantyType = WarrantyType::whereJsonContains('keywords', $word)->first();
+//            // Increment the count of the warranty type if it exists
+//            if ($warrantyType) {
+//                if (array_key_exists($warrantyType->id, $warrantyTypes)) {
+//                    $warrantyTypes[$warrantyType->id]['count']++;
+//                } else {
+//                    $warrantyTypes[$warrantyType->id] = [
+//                        'warrantyType' => $warrantyType,
+//                        'count' => 1,
+//                    ];
+//                }
+//            }
+//        }
+//
+//        // Sort the warranty types by count
+//        usort($warrantyTypes, function ($a, $b) {
+//            return $b['count'] <=> $a['count'];
+//        });
+//
+//        // Return the warranty type with the highest count
+//        return $warrantyTypes[0]['warrantyType'] ?? null;
+//    }
+
+    private function getDurationOfWarrantyNhanhvnType(string $warrantyCode): ?int
     {
-        $input = strtolower($input); // Convert the input to lowercase
-        $words = explode(' ', $input); // Split the input into words
-        $warrantyTypes = []; // Array of warranty types
-
-        foreach ($words as $word) {
-            $warrantyType = WarrantyType::whereJsonContains('keywords', $word)->first();
-            // Increment the count of the warranty type if it exists
-            if ($warrantyType) {
-                if (array_key_exists($warrantyType->id, $warrantyTypes)) {
-                    $warrantyTypes[$warrantyType->id]['count']++;
-                } else {
-                    $warrantyTypes[$warrantyType->id] = [
-                        'warrantyType' => $warrantyType,
-                        'count' => 1,
-                    ];
-                }
-            }
-        }
-
-        // Sort the warranty types by count
-        usort($warrantyTypes, function ($a, $b) {
-            return $b['count'] <=> $a['count'];
-        });
-
-        // Return the warranty type with the highest count
-        return $warrantyTypes[0]['warrantyType'] ?? null;
+        return WarrantyNhanhvnType::where('code', $warrantyCode)->first()->duration ?? null;
     }
 }
 ?>

@@ -9,7 +9,7 @@ use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 use Orchid\Metrics\Chartable;
 
-class WarrantyType extends Model
+class WarrantyNhanhvnType extends Model
 {
     use HasFactory, AsSource, Filterable, Attachable, Chartable;
 
