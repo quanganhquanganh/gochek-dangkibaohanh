@@ -38,19 +38,21 @@ class WarrantyResource extends Resource
             TD::make('id'),
 
             TD::make('name', 'Tên khách hàng')
-                // ->sort()
+                ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function ($model) {
                     return $model->name;
                 }),
 
             TD::make('phone', 'Số điện thoại')
+                ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function ($model) {
                     return $model->phone;
                 }),
 
             TD::make('created_at', 'Ngày đăng kí')
+                ->sort()
                 ->render(function ($model) {
                     return $model->created_at->toDateTimeString();
                 }),
