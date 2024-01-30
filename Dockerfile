@@ -33,4 +33,7 @@ USER root
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
+# Increase memory limit
+RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory-limit.ini
+
 CMD ["php-fpm"]
