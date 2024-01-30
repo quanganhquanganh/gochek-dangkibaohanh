@@ -62,7 +62,7 @@
                         class="bg-white px-3 py-1 text-[rgb(23, 23, 23)] font-bold rounded-full pulse flex items-center justify-between"
                         target="_blank">
                             <span class="hidden sm:block">
-                                Liên Hệ Ngay
+                                Hỗ trợ ngay
                             </span>
                             <img src="https://w.ladicdn.com/ladiui/icons/social/messenger.svg" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
                         </a>

@@ -30,45 +30,52 @@ class SyncSheets implements ShouldQueue
      */
     public function handle(): void
     {
-        $client = new Client();
-        $response = $client->get(env('GOCHEK_ALL_CODES_SHEET') . 'export?format=xlsx');
+        try {
+            Log::info('Syncing sheets started');
+            $client = new Client();
+            $response = $client->get(env('GOCHEK_ALL_CODES_SHEET') . 'export?format=xlsx');
 
-        $path = storage_path('app/public/gojek.xlsx');
-        file_put_contents($path, $response->getBody());
+            $path = storage_path('app/public/gojek.xlsx');
+            file_put_contents($path, $response->getBody());
 
-        $spreadsheet = IOFactory::load($path);
-        $sheetCount = $spreadsheet->getSheetCount();
-        $updated = 0;
+            $spreadsheet = IOFactory::load($path);
+            $sheetCount = $spreadsheet->getSheetCount();
+            $updated = 0;
 
-        for ($i = 0; $i < $sheetCount; $i++) {
-            $sheet = $spreadsheet->getSheet($i);
-            $maxCell = $sheet->getHighestRowAndColumn();
+            for ($i = 0; $i < $sheetCount; $i++) {
+                $sheet = $spreadsheet->getSheet($i);
+                $maxCell = $sheet->getHighestRowAndColumn();
 
-            Log::info([$sheet->getTitle(), $maxCell['row'], $maxCell['column']]);
+                Log::info([$sheet->getTitle(), $maxCell['row'], $maxCell['column']]);
 
-            $data = $sheet->rangeToArray(
-                'A1:' . $maxCell['column'] . $maxCell['row'],
-                null,
-                true,
-                true,
-                true
-            );
+                $data = $sheet->rangeToArray(
+                    'A1:' . $maxCell['column'] . $maxCell['row'],
+                    null,
+                    true,
+                    true,
+                    true
+                );
 
-            foreach ($data as $row) {
-                foreach ($row as $cell) {
-                    if (empty($cell)) {
-                        continue;
-                    }
-                    $value = $cell;
-                    if (preg_match('/^[A-Z]{2}\d{5,}$/', $value)) {
-                        // First or create the code, and increment the updated count
-                        WarrantyCode::firstOrCreate(['code' => $value])
-                            ? $updated++
-                            : null;
+                foreach ($data as $row) {
+                    foreach ($row as $cell) {
+                        if (empty($cell)) {
+                            continue;
+                        }
+                        $value = $cell;
+                        if (preg_match('/^[A-Z]{2}\d{5,}$/', $value)) {
+                            // First or create the code, and increment the updated count
+                            WarrantyCode::firstOrCreate(['code' => $value])
+                                ? $updated++
+                                : null;
+                        }
                     }
                 }
             }
+            Log::info("Updated {$updated} codes");
+            Log::info('Syncing sheets finished');
         }
-        Log::info("Updated {$updated} codes");
+        catch (\Exception $e) {
+            Log::error($e->getMessage());
+        }
     }
 }

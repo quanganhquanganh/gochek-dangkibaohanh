@@ -3,12 +3,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\OrderController;
 use App\Http\Requests\StoreWarrantyRequest;
+use App\Models\WarrantyNhanhvnType;
 use Illuminate\Http\Request;
 use App\Models\Warranty;
 use App\Models\WarrantyType;
 use App\Models\WarrantyCode;
 use App\Models\WarrantySearchVolume;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class WarrantyController extends Controller
 {
@@ -37,10 +41,11 @@ class WarrantyController extends Controller
         $warrantyTypeId = WarrantyType::where('code', $warrantyType)->value('id');
 
         if (!$warrantyTypeId) {
-            toastr()->error('Kích hoạt bảo hành không thành công. Quý khách vui lòng kiểm tra lại thông tin.', 'Không hợp lệ');
+            toastr()
+                ->error('Kích hoạt bảo hành không thành công. Quý khách vui lòng kiểm tra lại thông tin.', 'Không hợp lệ');
             return back();
         }
-        
+
         $warrantyCodeId = WarrantyCode::where('code', $validatedData['warranty_code'])->value('id');
         if (Warranty::where('warranty_code_id', $warrantyCodeId)->exists()) {
             toastr()->error('Sản phẩm này đã được kích hoạt bảo hành, để tra cứu thông tin bảo hành, truy cập vào mục “Tra cứu bảo hành”.', 'Không hợp lệ');
@@ -61,75 +66,117 @@ class WarrantyController extends Controller
 
     public function search(Request $request)
     {
-        $phone = $request->phone;
-        $warrantyCode = $request->warranty_code;
-        $warranties = collect();
+//        try {
+//            $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+//            Log::info($analyticsData->toJson());
+//        } catch (\Exception $e) {
+//            Log::error("Error fetching analytics data: " . $e->getMessage());
+//        }
+        try {
+            $phone = $request->phone;
+            $warrantyCode = $request->warranty_code;
+            $warranties = collect();
 
-        if ($phone == null && $warrantyCode == null) {
-            toastr()->error("Vui lòng điền thông tin để tra cứu bảo hành.", 'Không hợp lệ');
-            return back();
-        }
+            if ($phone == null && $warrantyCode == null) {
+                toastr()->error("Vui lòng điền thông tin để tra cứu bảo hành.", 'Không hợp lệ');
+                return back();
+            }
 
-        $warranties = Warranty::where('phone', $phone)
-            ->orWhereHas('warrantyCode', function ($query) use ($warrantyCode) {
-                $query->where('code', $warrantyCode);
-            })
-            ->with('warrantyType')
-            ->get();
+            $warranties = Warranty::where('phone', $phone)
+                ->orWhereHas('warrantyCode', function ($query) use ($warrantyCode) {
+                    $query->where('code', $warrantyCode);
+                })
+                ->with('warrantyType')
+                ->get();
 
-        if ($warranties->isEmpty() && $phone != null) {
-            $orderController = new OrderController();
-            $orders = $orderController->getOrders($phone);
+            if ($warranties->isEmpty() && $warrantyCode != null) {
+                $warrantyCode = WarrantyCode::where('code', $warrantyCode)->first();
+                $warrantyTypeCode = substr($warrantyCode->code, 0, 2);
+                $warrantyType = WarrantyType::where('code', $warrantyTypeCode)->first();
+                if ($warrantyCode && $warrantyType) {
+                    $warranties->push([
+                        'code' => $warrantyCode->code,
+                        'warrantyType' => [
+                            'duration' => $warrantyType->duration,
+                            'name' => $warrantyType->name,
+                        ],
+                        'warrantyCode' => [
+                            'code' => $warrantyCode->code,
+                        ],
+                        'created_at' => Carbon::createFromFormat('my', substr($warrantyCode->code, 2, 4))->addMonths(1)->startOfMonth(),
+                        'delivery' => false,
+                        'case' => 2
+                    ]);
+                }
+            }
+            elseif ($warranties->isEmpty() && $phone != null) {
+                $orderController = new OrderController();
+                $orders = $orderController->getOrders($phone);
 
-            if (isset($orders->data) && isset($orders->data->orders)) {
-                $orders = json_decode(json_encode($orders->data->orders), true);
-                usort($orders, function ($a, $b) {
-                    return $a['deliveryDate'] <=> $b['deliveryDate'];
-                });
+                if (isset($orders->data) && isset($orders->data->orders)) {
+                    $orders = json_decode(json_encode($orders->data->orders), true);
+                    usort($orders, function ($a, $b) {
+                        return $a['deliveryDate'] <=> $b['deliveryDate'];
+                    });
 
-                foreach ($orders as $order) {
-                    foreach ($order['products'] as $item) {
-                        $warrantyType = $this->findWarrantyType($item['productName']);
-                        if ($warrantyType) {
-                            $warrantyType['name'] = $item['productName'];
-                            if (!$warranties->contains('code', $item['productCode'])) {
+                    //Log::info('orders: '. count($orders) . '\n');
+                    foreach ($orders as $order) {
+//                    Log::info('order: \n');
+//                    Log::info('statusCode: ' . $order['statusCode'] . '\n');
+                        // Skip orders that are not successful
+                        if (isset($order['statusCode']) && $order['statusCode'] !== 'Success') {
+                            continue;
+                        }
+                        foreach ($order['products'] as $item) {
+                            $barcode = $item['productBarcode'];
+                            $duration = $this->getDurationOfWarrantyNhanhvnType($barcode);
+                            if ($duration){
                                 $warranties->push([
                                     'code' => $item['productCode'],
-                                    'warrantyType' => collect($warrantyType),
+                                    'warrantyType' => [
+                                        'duration' => $duration,
+                                        'name' => $item['productName'],
+                                    ],
                                     'warrantyCode' => [
-                                        'code' => $item['productCode'],
+                                        'code' => $barcode,
                                     ],
                                     'created_at' => $order['deliveryDate'],
                                     'delivery' => true,
+                                    'case' => 3
                                 ]);
                             }
                         }
                     }
                 }
             }
-        }
 
-        if ($warranties->isEmpty()) {
+            if ($warranties->isEmpty()) {
+                toastr()->error("Không tìm thấy thông tin sản phẩm.\nQuý khách vui lòng kiểm tra lại thông tin", 'Không hợp lệ');
+                return back();
+            }
+
+            foreach ($warranties as $warranty) {
+                $maxDuration = $warranty['warrantyType']['duration'];
+                $duration = $maxDuration;
+                if (isset($warranty['warrantyCode']['code'])) {
+                    try {
+                        $duration = $this->getDuration($warranty['warrantyCode']['code']);
+                    } catch (\Exception $e) {
+                        $duration = $maxDuration;
+                    }
+                }
+                $warranty['warrantyType']['duration'] = min($duration, $maxDuration);
+            }
+
+            $this->incrementVolume();
+
+            return view('result', compact('warranties'));
+        }
+        catch (\Exception $e) {
+            Log::error("Error fetching analytics data: " . $e->getMessage());
             toastr()->error("Không tìm thấy thông tin sản phẩm.\nQuý khách vui lòng kiểm tra lại thông tin", 'Không hợp lệ');
             return back();
         }
-
-        foreach ($warranties as $warranty) {
-            $maxDuration = $warranty['warrantyType']['duration'];
-            $duration = $maxDuration;
-            if (isset($warranty['warrantyCode']['code'])) {
-                try {
-                    $duration = $this->getDuration($warranty['warrantyCode']['code']);
-                } catch (\Exception $e) {
-                    $duration = $maxDuration;
-                }
-            }
-            $warranty['warrantyType']['duration'] = min($duration, $maxDuration);
-        }
-
-        $this->incrementVolume();
-
-        return view('result', compact('warranties'));
     }
 
     public function searchVolume(Request $request)
@@ -180,7 +227,7 @@ class WarrantyController extends Controller
         $now->second = 0;
         $now->hour = $now->hour - $now->hour % 6;
         // Increment the volume of the current hour
-        $searchVolume = WarrantySearchVolume::where('date', $now)->first(); 
+        $searchVolume = WarrantySearchVolume::where('date', $now)->first();
         if ($searchVolume) {
             $searchVolume->increment('volume');
         } else {
@@ -204,34 +251,9 @@ class WarrantyController extends Controller
         return 0;
     }
 
-    private function findWarrantyType(string $input): ?WarrantyType
+    private function getDurationOfWarrantyNhanhvnType(string $warrantyCode): ?int
     {
-        $input = strtolower($input); // Convert the input to lowercase
-        $words = explode(' ', $input); // Split the input into words
-        $warrantyTypes = []; // Array of warranty types
-
-        foreach ($words as $word) {
-            $warrantyType = WarrantyType::whereJsonContains('keywords', $word)->first();
-            // Increment the count of the warranty type if it exists
-            if ($warrantyType) {
-                if (array_key_exists($warrantyType->id, $warrantyTypes)) {
-                    $warrantyTypes[$warrantyType->id]['count']++;
-                } else {
-                    $warrantyTypes[$warrantyType->id] = [
-                        'warrantyType' => $warrantyType,
-                        'count' => 1,
-                    ];
-                }
-            }
-        }
-
-        // Sort the warranty types by count
-        usort($warrantyTypes, function ($a, $b) {
-            return $b['count'] <=> $a['count'];
-        });
-
-        // Return the warranty type with the highest count
-        return $warrantyTypes[0]['warrantyType'] ?? null;
+        return WarrantyNhanhvnType::where('code', $warrantyCode)->first()->duration ?? null;
     }
 }
 ?>

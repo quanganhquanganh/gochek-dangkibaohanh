@@ -6,7 +6,7 @@
             <div class="">
                 @include('components.icon.success')
             </div>
-            <div class="text-[40px] font-bold py-5">
+            <div class="text-[25px] md:text-[40px] font-bold py-5">
                 ĐĂNG KÝ THÀNH CÔNG!
             </div>
             <div class="text-[22px] font-bold py-4">
