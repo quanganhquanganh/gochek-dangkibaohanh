@@ -40,14 +40,14 @@ class PlatformProvider extends OrchidServiceProvider
             //     ->route(config('platform.index')),
 
             Menu::make('Thống kê')
-                ->icon('bs.collection')
+                ->icon('bs.bar-chart')
                 ->route('platform.example'),
             // ->badge(fn() => 6),
 
-            Menu::make('Form Elements')
-                ->icon('bs.card-list')
-                ->route('platform.example.fields')
-                ->active('*/examples/form/*'),
+//            Menu::make('Form Elements')
+//                ->icon('bs.card-list')
+//                ->route('platform.example.fields')
+//                ->active('*/examples/form/*'),
 
             // Menu::make('Overview Layouts')
             //     ->icon('bs.window-sidebar')
@@ -57,9 +57,9 @@ class PlatformProvider extends OrchidServiceProvider
             //     ->icon('bs.columns-gap')
             //     ->route('platform.example.grid'),
 
-            Menu::make('Charts')
-                ->icon('bs.bar-chart')
-                ->route('platform.example.charts'),
+//            Menu::make('Charts')
+//                ->icon('bs.bar-chart')
+//                ->route('platform.example.charts'),
 
             // Menu::make('Cards')
             //     ->icon('bs.card-text')
