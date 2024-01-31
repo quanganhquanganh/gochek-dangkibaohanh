@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\WarrantyCode;
 use App\Models\WarrantyType;
 use App\Models\Warranty;
+use Illuminate\Support\Facades\Log;
 
 class OriginalDataSeeder extends Seeder
 {
@@ -20,6 +21,7 @@ class OriginalDataSeeder extends Seeder
 
         while (($line = fgetcsv($file)) !== FALSE ) {
             // Search code in database
+            Log::info($line);
             $code = WarrantyCode::where('code', $line[3])->first();
             if (!$code) {
                 continue;
