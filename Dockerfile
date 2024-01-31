@@ -36,4 +36,9 @@ RUN touch /var/log/cron.log
 # Increase memory limit
 RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
+# Đặt múi giờ mặc định
+ENV TZ=Asia/Ho_Chi_Minh
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+
 CMD ["php-fpm"]

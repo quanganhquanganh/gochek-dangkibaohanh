@@ -66,12 +66,6 @@ class WarrantyController extends Controller
 
     public function search(Request $request)
     {
-//        try {
-//            $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
-//            Log::info($analyticsData->toJson());
-//        } catch (\Exception $e) {
-//            Log::error("Error fetching analytics data: " . $e->getMessage());
-//        }
         try {
             $phone = $request->phone;
             $warrantyCode = $request->warranty_code;

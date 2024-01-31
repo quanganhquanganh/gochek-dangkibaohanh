@@ -22,6 +22,9 @@
                     @csrf
                     <div class="text-white text-lg my-1">Vui lòng điền một trong hai thông tin dưới đây</div>
                     <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-5 py-3 my-2 bg-white">
+                    <br>
+                    <span class="text-white text-sm my-1">Hoặc</span>
+                    <br>
                     <input type="text" name="warranty_code" placeholder="Mã bảo hành" class="w-full px-5 py-3 my-2 bg-white">
                     <div class="flex justify-between mt-2 mb-2">
                         <button class="bg-[#962805] px-3 py-4 text-white font-bold text-[15px]" type="submit">

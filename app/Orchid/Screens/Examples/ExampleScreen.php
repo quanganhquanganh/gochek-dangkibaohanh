@@ -21,6 +21,8 @@ use Orchid\Screen\Screen;
 use Orchid\Screen\TD;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Facades\Toast;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 class ExampleScreen extends Screen
 {
@@ -56,6 +58,10 @@ class ExampleScreen extends Screen
                 'total' => number_format(65661),
                 'totalCode' => number_format(WarrantyCode::count()),
                 'totalWarranty' => number_format(Warranty::count()),
+                'warrantyRegisterToday' => number_format(Warranty::whereDate('created_at', Carbon::today())->count()),
+                'warrantyRegisterYesterday' => number_format(Warranty::whereDate('created_at', Carbon::yesterday())->count()),
+                'pageViewToday' => number_format($this->getPageView()),
+                'pageViewYesterday' => number_format($this->getPageView()),
             ],
         ];
     }
@@ -93,6 +99,11 @@ class ExampleScreen extends Screen
             //     ->modal('exampleModal')
             //     ->method('showToast')
             //     ->icon('bs.window'),
+
+            //Select period time for statistics
+//            Button::make('Chọn thời gian')
+//                ->method('showToast')
+//                ->icon('bs.calendar'),
         ];
     }
 
@@ -105,8 +116,8 @@ class ExampleScreen extends Screen
     {
         return [
             Layout::metrics([
-                'Lượt đăng kí bảo hành hôm nay' => 'metrics.sales',
-                'Lượt truy cập hôm nay' => 'metrics.visitors',
+                'Lượt đăng kí bảo hành hôm nay' => 'metrics.warrantyRegisterToday',
+                'Lượt truy cập hôm nay' => 'metrics.pageViewToday',
                 'Tổng số mã đã kích hoạt' => 'metrics.totalWarranty',
                 'Tổng số mã bảo hành' => 'metrics.totalCode',
             ]),
@@ -120,30 +131,30 @@ class ExampleScreen extends Screen
 //                    ->description('Compare data sets with colorful bar graphs.'),
 //            ]),
 
-            Layout::table('table', [
-                TD::make('id', 'ID')
-                    ->width('100')
-                    ->render(fn(Repository $model) => // Please use view('path')
-                        "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
-                              alt='sample'
-                              class='mw-100 d-block img-fluid rounded-1 w-100'>
-                            <span class='small text-muted mt-1 mb-0'># {$model->get('id')}</span>"),
-
-                TD::make('name', 'Name')
-                    ->width('450')
-                    ->render(fn(Repository $model) => Str::limit($model->get('name'), 200)),
-
-                TD::make('price', 'Price')
-                    ->width('100')
-                    ->usingComponent(Currency::class, before: '$')
-                    ->align(TD::ALIGN_RIGHT)
-                    ->sort(),
-
-                TD::make('created_at', 'Created')
-                    ->width('100')
-                    ->usingComponent(DateTimeSplit::class)
-                    ->align(TD::ALIGN_RIGHT),
-            ]),
+//            Layout::table('table', [
+//                TD::make('id', 'ID')
+//                    ->width('100')
+//                    ->render(fn(Repository $model) => // Please use view('path')
+//                        "<img src='https://loremflickr.com/500/300?random={$model->get('id')}'
+//                              alt='sample'
+//                              class='mw-100 d-block img-fluid rounded-1 w-100'>
+//                            <span class='small text-muted mt-1 mb-0'># {$model->get('id')}</span>"),
+//
+//                TD::make('name', 'Name')
+//                    ->width('450')
+//                    ->render(fn(Repository $model) => Str::limit($model->get('name'), 200)),
+//
+//                TD::make('price', 'Price')
+//                    ->width('100')
+//                    ->usingComponent(Currency::class, before: '$')
+//                    ->align(TD::ALIGN_RIGHT)
+//                    ->sort(),
+//
+//                TD::make('created_at', 'Created')
+//                    ->width('100')
+//                    ->usingComponent(DateTimeSplit::class)
+//                    ->align(TD::ALIGN_RIGHT),
+//            ]),
 
             Layout::modal('exampleModal', Layout::rows([
                 Input::make('toast')
@@ -241,5 +252,17 @@ class ExampleScreen extends Screen
 
         }
         return $datasets;
+    }
+
+    private function getPageView()
+    {
+        try {
+            $analyticsData = Analytics::fetchTotalVisitorsAndPageViews(Period::days(1));
+            Log::info($analyticsData->toJson());
+            return $analyticsData[0]['screenPageViews'];
+        } catch (\Exception $e) {
+            Log::error("Error fetching analytics data: " . $e->getMessage());
+            return 0;
+        }
     }
 }

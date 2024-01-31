@@ -13,7 +13,7 @@
                 <div class="block md:hidden">
                     @include('components.icon.small-phone', ['fill' => '#fff'])
                 </div>
-                <span class="ml-2">097 702 1884 (Tiktok, Shoppe)</span>
+                <span class="ml-2">097 702 1884 (TikTok, Shopee)</span>
             </div>
             <div class="flex items-center">
                 <div class="hidden md:block">
@@ -22,7 +22,7 @@
                 <div class="block md:hidden">
                     @include('components.icon.small-phone', ['fill' => '#fff'])
                 </div>
-                <span class="ml-2">0339 096 822 (Website, Facebook, Mua trực tiếp)</span>
+                <span class="ml-2">033 909 6822 (Website, Facebook, Mua trực tiếp)</span>
             </div>
         </div>
     </div>
