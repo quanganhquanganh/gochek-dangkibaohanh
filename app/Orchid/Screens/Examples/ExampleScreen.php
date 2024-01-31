@@ -43,13 +43,14 @@ class ExampleScreen extends Screen
     {
         return [
             'charts' => $this->datasetWarrantyRegisterChart(),
+            'charts2' => $this->datasetWarrantyRegisterCountInThisMonth(),
+            'charts3' => $this->datasetWarrantyRegisterChartInOneYear(),
             'table' => [
                 new Repository(['id' => 100, 'name' => self::TEXT_EXAMPLE, 'price' => 10.24, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 200, 'name' => self::TEXT_EXAMPLE, 'price' => 65.9, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 300, 'name' => self::TEXT_EXAMPLE, 'price' => 754.2, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 400, 'name' => self::TEXT_EXAMPLE, 'price' => 0.1, 'created_at' => '01.01.2020']),
                 new Repository(['id' => 500, 'name' => self::TEXT_EXAMPLE, 'price' => 0.15, 'created_at' => '01.01.2020']),
-
             ],
             'metrics' => [
                 'sales' => ['value' => number_format(6851), 'diff' => 10.08],
@@ -121,8 +122,17 @@ class ExampleScreen extends Screen
                 'Tổng số mã đã kích hoạt' => 'metrics.totalWarranty',
                 'Tổng số mã bảo hành' => 'metrics.totalCode',
             ]),
-            ChartBarExample::make('charts', 'Biểu đồ lượt đăng kí bảo hành theo tháng')
+            ChartBarExample::make('charts', 'Biểu đồ lượt đăng kí bảo hành theo tháng cho từng kênh')
                 ->description('Thống kê theo 12 tháng gần nhất'),
+
+            Layout::columns([
+                ChartBarExample::make('charts2', 'Biểu đồ lượt đăng kí bảo hành 30 ngày gần nhất')
+                    ->description('Thống kê theo 30 ngày gần nhất'),
+//                RegisteBarChart::make('charts3', 'Biểu đồ lượt đăng kí bảo hành theo ngày')
+//                    ->description('Thống kê theo 30 ngày gần nhất'),
+                ChartBarExample::make('charts3', 'Biểu đồ lượt đăng kí bảo hành theo tháng')
+                    ->description('Thống kê theo 12 tháng gần nhất'),
+            ]),
 //            Layout::columns([
 //                ChartLineExample::make('charts', 'Line Chart')
 //                    ->description('Visualize data trends with multi-colored line graphs.'),
@@ -169,6 +179,124 @@ class ExampleScreen extends Screen
     public function showToast(Request $request): void
     {
         Toast::warning($request->get('toast', 'Hello, world! This is a toast message.'));
+    }
+
+    public function datasetWarrantyRegisterCountInThisMonth(): array
+    {
+        $endDate = Carbon::now(); // Ngày hiện tại
+        $startDate = $endDate->copy()->subMonths(1); // Ngày này tháng trước
+
+        $labels = [];
+
+        // Tạo danh sách các tháng dưới dạng văn bản
+        while ($startDate <= $endDate) {
+            $labels[] = $startDate->format('d/m'); // 'd/m' lấy ngày và tháng
+            $startDate->addDay(); // Tăng ngày lên 1
+        }
+
+        $datasets = [];
+
+        $warrantyData = Warranty::whereBetween('created_at', [$endDate->copy()->subMonths(1), $endDate->copy()])
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->created_at->format('d/m');
+            })
+            ->map(function ($group, $key) {
+                return [
+                    'name' => $key,
+                    'count' => count($group)
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        $queryWithZeros = [];
+        foreach ($labels as $day) {
+            $found = false;
+            foreach ($warrantyData as $data) {
+                if ($data['name'] === $day) {
+                    $queryWithZeros[] = $data;
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $queryWithZeros[] = [
+                    'name' => $day,
+                    'count' => 0,
+                ];
+            }
+        }
+
+        $datasets[] = [
+            'name' => 'Lượt đăng kí bảo hành 30 ngày gần nhất',
+            'values' => array_column($queryWithZeros, 'count'),
+            'labels' => $labels,
+        ];
+
+//        Log::info('Dataset: ');
+//        Log::info($datasets);
+        return $datasets;
+    }
+
+    public function datasetWarrantyRegisterChartInOneYear()
+    {
+        $endDate = Carbon::now(); // Ngày hiện tại
+        $startDate = $endDate->copy()->subMonths(11); // Ngày 12 tháng trước
+
+        $labels = [];
+
+        // Tạo danh sách các tháng dưới dạng văn bản
+        while ($startDate <= $endDate) {
+            $labels[] = $startDate->format('m/y'); // 'F Y' lấy tên tháng và năm
+            $startDate->addMonth(); // Tăng tháng lên 1
+        }
+
+        $datasets = [];
+
+        $warrantyData = Warranty::whereBetween('created_at', [$endDate->copy()->subMonths(11)->startOfMonth(), $endDate->copy()->endOfMonth()])
+            ->get()
+            ->groupBy(function ($item) {
+                return $item->created_at->format('m/y');
+            })
+            ->map(function ($group, $key) {
+                return [
+                    'name' => $key,
+                    'count' => count($group)
+                ];
+            })
+            ->values()
+            ->toArray();
+
+        $queryWithZeros = [];
+        foreach ($labels as $month) {
+            $found = false;
+            foreach ($warrantyData as $data) {
+                if ($data['name'] === $month) {
+                    $queryWithZeros[] = $data;
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                $queryWithZeros[] = [
+                    'name' => $month,
+                    'count' => 0,
+                ];
+            }
+        }
+
+        $datasets[] = [
+            'name' => 'Lượt đăng kí bảo hành 12 tháng gần nhất',
+            'values' => array_column($queryWithZeros, 'count'),
+            'labels' => $labels,
+        ];
+
+//        Log::info('Dataset: ');
+//        Log::info($datasets);
+        return $datasets;
     }
 
     public function datasetWarrantyRegisterChart(): array
