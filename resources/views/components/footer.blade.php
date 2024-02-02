@@ -11,7 +11,8 @@
         </div>
         <div class="flex flex-col text-sm mt-6">
             <div class="flex items-center">
-                @include('components.icon.home', ['fill' => '#fff'])
+                @include('components.icon.home', ['fill' => '#fff', 'class' => 'hidden md:block self-start'])
+                @include('components.icon.small-screen-home', ['fill' => '#fff', 'class' => 'block md:hidden self-start'])
                 <span class="ml-2">Cửa hàng Đại lý Ủy quyền: 501 Nguyễn Trãi, Thanh Xuân Nam, Thanh Xuân, Hà Nội</span>
             </div>
             <div class="mt-3 flex items-center">

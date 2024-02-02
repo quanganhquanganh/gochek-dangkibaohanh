@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 576 512"
+<svg xmlns="http://www.w3.org/2000/svg" height="25" width="25" viewBox="0 0 576 512"
      class="{{ $class ?? '' }}" style="{{ $style ?? '' }}" fill="{{ $fill ?? '' }}">
     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
     <path opacity="1" fill="{{ $fill ?? '#1E3050' }}"

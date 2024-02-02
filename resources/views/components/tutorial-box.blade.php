@@ -4,10 +4,10 @@
           VỊ TRÍ MÃ BẢO HÀNH
       </div>
       <div class="w-1/4 border-b border-dashed border-[#c2c5d1] mb-4"></div>
-      <span class="font-bold text-[22px]">
+      <span class="font-bold text-[22px] px-3">
       Mã bảo hành được in trên Thẻ bảo hành
   </span>
-  <span class="text-[14px]">
+  <span class="text-[14px] px-3">
       (Mỗi một sản phẩm có một mã bảo hành riêng)
   </span>
   <div class="mt-10 mb-10 grid lg:grid-cols-2 gap-0">
@@ -16,7 +16,7 @@
           bg-no-repeat bg-top bg-cover bg-scroll bg-content-box
           pointer-events-none"
           style="background-image: url('https://w.ladicdn.com/s750x550/5ac37fb5e9cb7e9e17437a81/the-bao-hanh-3-20230906021458-9bxxo.png');">
-          <div id="rectangle-box" 
+          <div id="rectangle-box"
               class="absolute top-[84%] left-[65%] w-[28%] h-[12%] border-2 border-solid border-[#bb3003] py-2">
           </div>
       </div>
@@ -28,6 +28,6 @@
           </div>
       </div>
   </div>
-</div> 
+</div>
   </div>
 </div>
