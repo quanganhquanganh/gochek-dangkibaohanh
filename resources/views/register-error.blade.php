@@ -10,7 +10,11 @@
                 ĐĂNG KÝ KHÔNG THÀNH CÔNG!
             </div>
             <div class="text-[22px] font-bold py-4 text-center">
-                Hiện tại trên hệ thống không có dữ kiện về thời gian bảo hành cho sản phẩm này.
+                Hiện tại trên hệ thống không có
+                <br class="inline md:hidden">
+                dữ kiện về thời gian bảo hành cho
+                <br class="inline md:hidden">
+                sản phẩm này.
             </div>
             <div class="text-[15px] text-center">
                 Quý khách vui lòng liên hệ hotline:
