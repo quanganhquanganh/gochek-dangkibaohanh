@@ -15,7 +15,8 @@ use App\Http\Controllers\WarrantyController;
 */
 
 Route::get('/', function () {
-    return view('home'); // Trả về view home.blade.php
+    $products = \App\Models\Product::all();
+    return view('home', compact('products')); // Trả về view home.blade.php
 })->name('home');
 
 Route::get('/search', function () {
@@ -25,6 +26,14 @@ Route::get('/search', function () {
 Route::post('/warranty-check', [WarrantyController::class, 'store'])->name('warranty-check');
 
 Route::post('/warranty-search', [WarrantyController::class, 'search'])->name('warranty-search');
+
+//baohanh create
+Route::post('/baohanh', [\App\Http\Controllers\BaoHanhController::class, 'store'])->name('baohanh.store');
+Route::post('/baohanh/search', [\App\Http\Controllers\BaoHanhController::class, 'search'])->name('baohanh.search');
+
+Route::get('/error', function () {
+    return view('register-error');
+})->name('register-error');
 
 Route::get('/oauth/login', function () {
     $apiVersion = '2.0';

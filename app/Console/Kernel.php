@@ -13,8 +13,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->job(new SyncSheets)->everyFiveMinutes()
-            ->appendOutputTo(storage_path('logs/sync-sheets.log'));
+//        $schedule->job(new SyncSheets)->everyFiveMinutes()
+//            ->appendOutputTo(storage_path('logs/sync-sheets.log'));
     }
 
     /**

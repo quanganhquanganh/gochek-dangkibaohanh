@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Product;
 use App\Models\WarrantyNhanhvnType;
 use Illuminate\Database\Seeder;
 use App\Models\WarrantyType;
@@ -170,31 +171,48 @@ class DatabaseSeeder extends Seeder
         ],
     ];
 
+    private array $storesName = [
+        'Micro Ultra',
+        'Micro Ultra Plus',
+        'Tai nghe SpaceX',
+        'Gimbal HunteX G5',
+        'Gậy chụp ảnh SS100',
+        'Gậy chụp ảnh S140',
+        'Củ sạc A9'
+    ];
 
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        foreach ($this->warrantNames as $code => $name) {
-            WarrantyType::updateOrCreate(
-                ['code' => $code],
-                [
-                    'name' => $name,
-                    'duration' => $this->warrantyDurations[$code],
-                    'keywords' => json_encode($this->warrantyKeywords[$code]),
-                ]
+
+        foreach ($this->storesName as $name) {
+            Product::updateOrCreate(
+                ['name' => $name],
+                ['name' => $name]
             );
         }
 
-        foreach ($this->warrantyNhanhvnTypes as $code => $data) {
-            WarrantyNhanhvnType::updateOrCreate(
-                ['code' => $code],
-                [
-                    'name' => $data['name'],
-                    'duration' => $data['duration'],
-                ]
-            );
-        }
+//        foreach ($this->warrantNames as $code => $name) {
+//            WarrantyType::updateOrCreate(
+//                ['code' => $code],
+//                [
+//                    'name' => $name,
+//                    'duration' => $this->warrantyDurations[$code],
+//                    'keywords' => json_encode($this->warrantyKeywords[$code]),
+//                ]
+//            );
+//        }
+//
+//        foreach ($this->warrantyNhanhvnTypes as $code => $data) {
+//            WarrantyNhanhvnType::updateOrCreate(
+//                ['code' => $code],
+//                [
+//                    'name' => $data['name'],
+//                    'duration' => $data['duration'],
+//                ]
+//            );
+//        }
     }
 }

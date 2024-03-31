@@ -18,7 +18,7 @@
             </span>
             </div>
             <div class="row-span-1 p-5 py mb-12">
-                <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('warranty-search') }}" method="POST">
+                <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('baohanh.search') }}" method="POST">
                     @csrf
                     <div class="text-white text-lg my-1">Vui lòng điền một trong hai thông tin dưới đây</div>
                     <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-5 py-3 my-2 bg-white">
@@ -38,6 +38,6 @@
     {{--End Main Form--}}
 
     {{--Tutorial Box--}}
-    @include('components.tutorial-box')
+{{--    @include('components.tutorial-box')--}}
     {{--End Tutorial Box--}}
 @endsection

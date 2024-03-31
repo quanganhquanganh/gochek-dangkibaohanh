@@ -1,6 +1,7 @@
 {{--Chuyen Tab --}}
 <div class="w-full bg-black text-white bg-[left_-10px_bottom_-200px] bg-no-repeat"
-     style="background-image: url('{{ asset('tab-bg.png') }}')">
+{{--     style="background-image: url('{{ asset('tab-bg.png') }}')">--}}
+        style="background-image: url('https://res.cloudinary.com/kien-save-img/image/upload/v1711860276/tab-bg_vyil0p.png')">
     <div class="w-full lg:w-[960px] mx-auto py-5 lg:py-24">
         <div class="text-2xl lg:text-[51px] font-bold text-center py-10">BẢO HÀNH ĐIỆN TỬ GOCHEK</div>
         <div class="px-16 md:px-0 flex flex-col md:flex-row text-lg justify-around font-bold">
