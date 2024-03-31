@@ -57,7 +57,7 @@
 
                     <select name="store_name" class="w-full px-3 py-3 my-2 bg-white" required >
                         <option value="" selected disabled>Nơi mua</option>
-                        <option value="Cửa hàng Đại lý Ủy quyền">Mua trực tiếp</option>
+                        <option value="Cửa hàng Đại lý Ủy quyền">Mua trực tiếp tại cửa hàng</option>
                         <option value="Facebook">Facebook</option>
                         <option value="TikTok Shop">Tiktok Shop</option>
                         <option value="Shopee">Shopee</option>

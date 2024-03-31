@@ -21,7 +21,7 @@
                 <strong>
                     033 909 6822
                 </strong>
-                được hỗ trợ
+                để được hỗ trợ
             </div>
         </div>
     </div>
