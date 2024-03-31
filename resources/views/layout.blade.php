@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png" sizes="16x16">
-    <title>Bảo Hành Điện Tử Gochek</title>
+    <title>Bảo Hành Điện Tử GoChek</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">

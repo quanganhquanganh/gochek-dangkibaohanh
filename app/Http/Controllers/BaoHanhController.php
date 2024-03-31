@@ -3,12 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\BaoHanh;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class BaoHanhController extends Controller
 {
     //
+
+    public function syncBaohanhToSheet(Request $request)
+    {
+        $lastUpdated = Carbon::parse($request->lastUpdated ?? '2021-01-01 00:00:00');
+        $baoHanhs = BaoHanh::where('created_at', '>', $lastUpdated)->orderBy('created_at', 'desc')->get();
+        Log::info('Now: ' . now() . ' Last Updated: ' . $lastUpdated);
+        Log::info('Found ' . $baoHanhs->count() . ' new baohanh');
+//        Log::info($baoHanhs);
+        return response()->json([
+            'lastUpdated' => now(),
+            'baoHanhs' => $baoHanhs
+        ]);
+    }
+
     public function store(Request $request)
     {
         try {
@@ -44,16 +59,13 @@ class BaoHanhController extends Controller
             ]);
 
             $baoHanhs = BaoHanh::where('phone', $request->phone)->orderBy('created_at', 'desc')->get();
-            if ($baoHanhs->count() > 0) {
-                return view('result', compact('baoHanhs'));
-            }
-            toastr()->error('Không tìm thấy thông tin bảo hành.');
-            return back();
         }
         catch (\Exception $e) {
             Log::error($e->getMessage());
-            toastr()->error('Có lỗi xảy ra, vui lòng thử lại sau.');
-            return back();
+        }
+        finally {
+            $baoHanhs = $baoHanhs ?? [];
+            return view('result', compact('baoHanhs'));
         }
     }
 }

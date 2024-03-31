@@ -21,7 +21,8 @@
                 <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('baohanh.search') }}" method="POST">
                     @csrf
                     <div class="text-white text-lg my-1">Vui lòng điền một trong hai thông tin dưới đây</div>
-                    <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-5 py-3 my-2 bg-white">
+                    <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-5 py-3 my-2 bg-white"
+                           minlength="10" maxlength="11" pattern="[0-9]+">
                     <br>
                     <span class="text-white text-sm my-1">Hoặc</span>
                     <br>

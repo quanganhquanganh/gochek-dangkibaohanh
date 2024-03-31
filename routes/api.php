@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Get all warranties
 Route::get('/warranties', [WarrantyController::class, 'index']);
 
+//Sync baohanh to sheet
+Route::get('/sync-baohanh', [\App\Http\Controllers\BaoHanhController::class, 'syncBaohanhToSheet']);
+
 // Get store statistics
 Route::get('/store-statistics', [WarrantyController::class, 'storeStatistics']);
 

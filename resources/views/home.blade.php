@@ -43,18 +43,21 @@
                 <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('baohanh.store') }}" method="POST">
                     @csrf
                     <div class="text-white text-lg my-1">Vui lòng điền đầy đủ các thông tin sau</div>
-                    <input type="text" name="user_name" placeholder="Họ và tên" class="w-full px-3 py-3 my-2 bg-white" required oninvalid="this.setCustomValidity('Vui lòng điền đầy đủ thông tin để kích hoạt bảo hành.')">
-                    <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-3 py-3 my-2 bg-white" required oninvalid="this.setCustomValidity('Vui lòng điền đầy đủ thông tin để kích hoạt bảo hành.')">
-                    <input type="text" name="email" placeholder="Email" class="w-full px-3 py-3 my-2 bg-white" >
+                    <input type="text" name="user_name" placeholder="Họ và tên" class="w-full px-3 py-3 my-2 bg-white" required >
+                    <input type="text" name="phone" placeholder="Số điện thoại" class="w-full px-3 py-3 my-2 bg-white" required
+                           minlength="10" maxlength="11" pattern="[0-9]+">
+                    <input type="email" name="email" placeholder="Email" class="w-full px-3 py-3 my-2 bg-white" >
 {{--                    <input type="text" name="warranty_code" placeholder="Mã bảo hành" class="w-full px-3 py-3 my-2 bg-white" required oninvalid="this.setCustomValidity('Vui lòng điền đầy đủ thông tin để kích hoạt bảo hành.')">--}}
-                    <select name="product_name" class="w-full px-3 py-3 my-2 bg-white" required oninvalid="this.setCustomValidity('Vui lòng điền đầy đủ thông tin để kích hoạt bảo hành.')">
+                    <select name="product_name" class="w-full px-3 py-3 my-2 bg-white" required >
+                        <option value="" selected disabled>Tên sản phẩm</option>
                         @foreach($products as $product)
                             <option value="{{ $product->name }}">{{ $product->name }}</option>
                         @endforeach
                     </select>
 
-                    <select name="store_name" class="w-full px-3 py-3 my-2 bg-white" required oninvalid="this.setCustomValidity('Vui lòng điền đầy đủ thông tin để kích hoạt bảo hành.')">
-                        <option value="Cửa hàng Đại lý Ủy quyền" selected>Mua trực tiếp</option>
+                    <select name="store_name" class="w-full px-3 py-3 my-2 bg-white" required >
+                        <option value="" selected disabled>Nơi mua</option>
+                        <option value="Cửa hàng Đại lý Ủy quyền">Mua trực tiếp</option>
                         <option value="Facebook">Facebook</option>
                         <option value="TikTok Shop">Tiktok Shop</option>
                         <option value="Shopee">Shopee</option>
