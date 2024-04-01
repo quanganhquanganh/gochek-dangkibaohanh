@@ -7,10 +7,10 @@
                 @include('components.icon.success')
             </div>
             <div class="text-[25px] md:text-[40px] font-bold py-5">
-                ĐĂNG KÝ THÀNH CÔNG!
+                KÍCH HOẠT THÀNH CÔNG!
             </div>
             <div class="text-[22px] font-bold py-4">
-                CẢM ƠN BẠN ĐÃ ĐĂNG KÝ BẢO HÀNH ĐIỆN TỬ
+                CẢM ƠN BẠN ĐÃ KÍCH HOẠT BẢO HÀNH
             </div>
             <div class="text-[15px]">
                 Quý khách có thể tra cứu thời hạn bảo hành tại
