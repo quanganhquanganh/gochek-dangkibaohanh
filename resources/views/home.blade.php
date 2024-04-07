@@ -64,6 +64,11 @@
                         <option value="Lazada">Lazada</option>
                         <option value="Website">Website</option>
                     </select>
+                    <select name="need_help" class="w-full px-3 py-3 my-2 bg-white" required >
+                        <option value="" selected disabled>Hiện tại bạn có cần hỗ trợ ngay không?</option>
+                        <option value="Có, tôi muốn được gọi điện hỗ trợ ngay">Có, tôi muốn được gọi điện hỗ trợ ngay</option>
+                        <option value="Không, hiện tại tôi không có thắc mắc nào">Không, hiện tại tôi không có thắc mắc nào</option>
+                    </select>
                     <div class="flex justify-between mt-3 ">
                         <button class="bg-[#962805] px-3 py-1 text-white font-bold leading-10" type="submit">
                             Kích hoạt bảo hành ngay

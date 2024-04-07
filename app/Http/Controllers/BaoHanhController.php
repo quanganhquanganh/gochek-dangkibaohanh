@@ -32,7 +32,8 @@ class BaoHanhController extends Controller
                 'phone' => 'required',
                 'email' => 'nullable | email',
                 'product_name' => 'required | exists:products,name',
-                'store_name' => 'required'
+                'store_name' => 'required',
+                'need_help' => 'required'
             ]);
 
             BaoHanh::create($request->only([
@@ -41,7 +42,8 @@ class BaoHanhController extends Controller
                 'email',
                 'address',
                 'product_name',
-                'store_name'
+                'store_name',
+                'need_help'
             ]));
             return view('success');
         }
