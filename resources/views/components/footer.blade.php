@@ -25,7 +25,7 @@
             </div>
             <div class="mt-3 flex items-center">
                 @include('components.icon.global', ['fill' => '#fff'])
-                <span class="ml-3">Website: http://gochek.com.vn</span>
+                <span class="ml-3">Website: http://gochek.vn</span>
             </div>
         </div>
 
