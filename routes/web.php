@@ -15,7 +15,7 @@ use App\Http\Controllers\WarrantyController;
 */
 
 Route::get('/', function () {
-    $products = \App\Models\Product::all();
+    $products = \App\Models\Product::orderBy('id', 'desc')->get();
     return view('home', compact('products')); // Trả về view home.blade.php
 })->name('home');
 
