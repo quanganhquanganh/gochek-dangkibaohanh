@@ -25,6 +25,9 @@ Route::get('/warranties', [WarrantyController::class, 'index']);
 //Sync baohanh to sheet
 Route::get('/sync-baohanh', [\App\Http\Controllers\BaoHanhController::class, 'syncBaohanhToSheet']);
 
+//Sync old sheet to baohanh
+Route::get('/sync-old-sheet', [\App\Http\Controllers\BaoHanhController::class, 'syncOldSheetToBaohanh']);
+
 // Get store statistics
 Route::get('/store-statistics', [WarrantyController::class, 'storeStatistics']);
 

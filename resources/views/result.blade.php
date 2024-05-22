@@ -33,6 +33,9 @@
                 @foreach($baoHanhs as $warranty)
                     <div class="w-full p-4 border-b border-gray-200">
                         <div class="text-lg">Tên sản phẩm: <strong>{{ $warranty['product_name'] }}</strong></div>
+                        @if (!empty($warranty['code']))
+                            <div class="text-lg">Mã bảo hành: <strong>{{ $warranty['code'] }}</strong></div>
+                        @endif
                         <div class="text-lg">Thời gian gian đăng ký bảo hành: <strong>{{ $warranty['created_at']->format('d-m-Y') }}</strong>
                         </div>
                         <div class="text-lg">Thời hạn bảo hành: <strong>{{ $warranty['created_at']->addMonths(12)->format('d-m-Y') }}</strong>

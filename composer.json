@@ -13,11 +13,13 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "league/csv": "^9.15",
         "orchid/crud": "^4.1",
         "orchid/platform": "^14.18",
         "phpoffice/phpspreadsheet": "^1.29",
         "revolution/laravel-google-sheets": "^6.2",
         "spatie/laravel-analytics": "^5.2",
+        "spatie/simple-excel": "^3.6",
         "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
