@@ -126,7 +126,10 @@ class BaoHanhController extends Controller
                 'email' => 'nullable | email',
                 'product_name' => 'required | exists:products,name',
                 'store_name' => 'required',
-                'need_help' => 'required'
+                'need_help' => 'required',
+                'date_of_birth' => 'nullable',
+                'device' => 'nullable',
+                'purpose_of_use' => 'nullable',
             ]);
 
             BaoHanh::create($request->only([
@@ -136,7 +139,10 @@ class BaoHanhController extends Controller
                 'address',
                 'product_name',
                 'store_name',
-                'need_help'
+                'need_help',
+                'date_of_birth',
+                'device',
+                'purpose_of_use',
             ]));
             return view('success');
         }
