@@ -16,6 +16,15 @@
                 }
             }
 
+            textarea,
+            input.text,
+            input[type="text"],
+            input[type="button"],
+            input[type="submit"],
+            .input-checkbox {
+            -webkit-appearance: none;
+            } 
+
             a.pulse {
                 animation: pulse 1s infinite;
             }
@@ -66,12 +75,8 @@
                 }
             }
 
-            /* Media query for smaller devices */
-            @media (max-width: 768pxpx) {
-                .relative select {
-                    padding-left: 1.75rem; /* Adjust as needed */
-                }
-            }
+
+            
         </style>
         <script>
             $(document).ready(function() {
@@ -171,7 +176,8 @@
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
                             required 
                         >
-                            <option value="" selected disabled>Tên sản phẩm</option>
+                            <option value="" selected disabled
+                            >Tên sản phẩm</option>
                             @foreach($products as $product)
                                 <option value="{{ $product->name }}">{{ $product->name }}</option>
                             @endforeach
