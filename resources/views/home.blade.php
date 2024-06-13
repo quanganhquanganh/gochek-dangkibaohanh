@@ -19,11 +19,58 @@
             a.pulse {
                 animation: pulse 1s infinite;
             }
-            input:required::after,
-            select:required::after {
-                content: '*';
-                color: #ff0000; /* Màu đỏ */
-                margin-left: 5px; /* Khoảng cách giữa * và input */
+            /* Custom styles for the placeholder of a specific input */
+            .custom-placeholder::placeholder {
+                font-size: 0.8em;
+                line-height: 1.2em;
+                white-space: normal;
+            }
+
+            .custom-placeholder::-webkit-input-placeholder {
+                font-size: 0.8em;
+                line-height: 1.2em;
+                white-space: normal;
+            }
+
+            .custom-placeholder::-moz-placeholder {
+                font-size: 0.8em;
+                line-height: 1.2em;
+                white-space: normal;
+            }
+
+            .custom-placeholder:-ms-input-placeholder {
+                font-size: 0.8em;
+                line-height: 1.2em;
+                white-space: normal;
+            }
+
+            .custom-placeholder:-moz-placeholder {
+                font-size: 0.8em;
+                line-height: 1.2em;
+                white-space: normal;
+            }
+
+            /* Additional styles to ensure proper display */
+            .custom-placeholder {
+                height: 48px;
+                padding: 10px 12px 10px 20px;
+                display: flex;
+                align-items: center;
+                font-size: 0.8em;
+            }
+
+            /* Media query for mobile devices */
+            @media (max-width: 768px) {
+                .custom-placeholder {
+                    height: 32px;
+                }
+            }
+
+            /* Media query for smaller devices */
+            @media (max-width: 768pxpx) {
+                .relative select {
+                    padding-left: 1.75rem; /* Adjust as needed */
+                }
             }
         </style>
         <script>
@@ -113,8 +160,8 @@
                     <input 
                             type="text" 
                             name="device" 
-                            placeholder="Thiết bị (điện thoại/ máy tính) đang sử dụng" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
+                            placeholder="Thiết bị (điện thoại/máy tính) đang sử dụng (ví dụ iphone 14)" 
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white custom-placeholder" 
                             maxlength="50"
                         >
 
