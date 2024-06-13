@@ -21,6 +21,7 @@
             input[type="text"],
             input[type="button"],
             input[type="submit"],
+            select,
             .input-checkbox {
             -webkit-appearance: none;
             } 
