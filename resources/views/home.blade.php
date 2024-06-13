@@ -26,6 +26,13 @@
             -webkit-appearance: none;
             } 
 
+             /* Media query for mobile devices */
+             @media (max-width: 768px) {
+                select {
+                    border-radius: 5px;
+                }
+            }
+
             a.pulse {
                 animation: pulse 1s infinite;
             }
