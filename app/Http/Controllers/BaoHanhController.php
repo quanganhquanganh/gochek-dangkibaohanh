@@ -123,13 +123,13 @@ class BaoHanhController extends Controller
             $request->validate([
                 'user_name' => 'required',
                 'phone' => 'required',
-                'email' => 'nullable | email',
+                // 'email' => 'nullable | email',
                 'product_name' => 'required | exists:products,name',
                 'store_name' => 'required',
                 'need_help' => 'required',
-                'date_of_birth' => 'nullable',
-                'device' => 'nullable',
-                'purpose_of_use' => 'nullable',
+                // 'date_of_birth' => 'nullable',
+                // 'device' => 'nullable',
+                // 'purpose_of_use' => 'nullable',
             ]);
 
             BaoHanh::create($request->only([

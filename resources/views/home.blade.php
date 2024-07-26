@@ -117,14 +117,7 @@
                 <form class="rounded-md text-black bg-[#454545] px-5 py-5" action="{{ route('baohanh.store') }}" method="POST">
                     @csrf
                     <div class="text-white my-1">
-                        <div class="text-lg font-bold">
-                            Vui lòng điền các thông tin, ô đánh 
-                            (<span class="text-red-500">*</span>) 
-                            là thông tin bắt buộc
-                        </div>
-                        <div class="text-sm mt-1">
-                            Những ô còn lại khi điền đầy đủ Gochek sẽ hỗ trợ được cho quý khách tốt nhất và cập nhật sớm nhất các chương trình khuyến mại
-                        </div>
+                    Vui lòng điền các thông tin đầy đủ để GoChek có thể hỗ trợ quý khách tốt nhất và cập nhật sớm các chương trình khuyến mại
                     </div>
 
 
@@ -136,7 +129,7 @@
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
                             required 
                         >
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span>
+                        <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
                     <div class="relative">
@@ -150,19 +143,19 @@
                             maxlength="11" 
                             pattern="[0-9]+"
                         >
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span>
+                        <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
-                    <div class="relative">
+                    <!-- <div class="relative">
                         <input 
                             type="email" 
                             name="email" 
                             placeholder="Email" 
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                         >
-                    </div>
+                    </div> -->
 
-                    <input 
+                    <!-- <input 
                             type="text" 
                             id="date_of_birth" 
                             name="date_of_birth" 
@@ -176,7 +169,7 @@
                             placeholder="Thiết bị (điện thoại/máy tính) đang sử dụng (ví dụ iphone 14)" 
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white custom-placeholder" 
                             maxlength="50"
-                        >
+                        > -->
 
                     <div class="relative">
                         <select 
@@ -190,7 +183,7 @@
                                 <option value="{{ $product->name }}">{{ $product->name }}</option>
                             @endforeach
                         </select>
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span>
+                        <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
                     <div class="relative">
@@ -207,17 +200,17 @@
                             <option value="Lazada">Lazada</option>
                             <option value="Website">Website</option>
                         </select>
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span>
+                        <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
-                    <div class="relative">
+                    <!-- <div class="relative">
                         <input 
                             name="purpose_of_use" 
                             placeholder="Mục đích sử dụng" 
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                             maxlength="50"
                         > 
-                    </div>
+                    </div> -->
 
                     <div class="relative">
                         <select 
@@ -229,11 +222,14 @@
                             <option value="Có, tôi muốn được gọi điện hỗ trợ ngay">Có, tôi muốn được gọi điện hỗ trợ ngay</option>
                             <option value="Không, hiện tại tôi không có thắc mắc nào">Không, hiện tại tôi không có thắc mắc nào</option>
                         </select>
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span>
+                        <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
                     <div class="flex justify-between mt-3">
-                        <button class="bg-[#962805] px-3 py-1 text-white font-bold leading-10" type="submit">
+                        <!-- <button class="bg-[#962805] px-3 py-1 text-white font-bold leading-10" type="submit">
+                            Kích hoạt bảo hành ngay
+                        </button> -->
+                        <button class="bg-[#962805] px-3 py-1 text-white font-bold leading-10 hover:shadow-lg hover:transform hover:-translate-y-1 transition duration-200 ease-in-out" type="submit">
                             Kích hoạt bảo hành ngay
                         </button>
                         <a href="https://zalo.me/2224917289255900596" class="bg-white px-3 py-1 text-[rgb(23, 23, 23)] font-bold rounded-full pulse flex items-center justify-between" target="_blank">
