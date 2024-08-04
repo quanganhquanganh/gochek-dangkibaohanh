@@ -122,6 +122,7 @@ class BaoHanhController extends Controller
         try {
             $request->validate([
                 'user_name' => 'required',
+                'code' => 'required',
                 'phone' => 'required',
                 // 'email' => 'nullable | email',
                 'product_name' => 'required | exists:products,name',
@@ -134,6 +135,7 @@ class BaoHanhController extends Controller
 
             BaoHanh::create($request->only([
                 'user_name',
+                'code',
                 'phone',
                 'email',
                 'address',
@@ -161,26 +163,33 @@ class BaoHanhController extends Controller
             'warranty_code' => 'nullable'
         ]);
 
-        // Khởi tạo query cho BaoHanh
-        $query = BaoHanh::query();
-
-        // Thêm điều kiện tìm kiếm nếu tồn tại phone
-        if ($request->filled('phone')) {
-            $query->where('phone', $request->phone);
+        // Kiểm tra nếu cả hai từ khóa tìm kiếm đều null
+        if (!$request->filled('phone') && !$request->filled('warranty_code')) {
+           
         }
+        // Nếu có ít nhất một trường tìm kiếm
+        else {
+            // Khởi tạo query cho BaoHanh
+            $query = BaoHanh::query();
 
-        // Thêm điều kiện tìm kiếm nếu tồn tại warranty_code
-        if ($request->filled('warranty_code')) {
-            $query->where('code', trim($request->warranty_code));
+            // Thêm điều kiện tìm kiếm nếu tồn tại phone
+            if ($request->filled('phone')) {
+                $query->where('phone', $request->phone);
+            }
+
+            // Thêm điều kiện tìm kiếm nếu tồn tại warranty_code
+            if ($request->filled('warranty_code')) {
+                $query->where('code', trim($request->warranty_code));
+            }
+
+            // Thực hiện truy vấn và sắp xếp theo ngày tạo
+            $baoHanhs = $query->orderBy('created_at', 'desc')->get();
         }
-
-        // Thực hiện truy vấn và sắp xếp theo ngày tạo
-        $baoHanhs = $query->orderBy('created_at', 'desc')->get();
         } catch (\Exception $e) {
             Log::error($e->getMessage());
         } finally {
             $baoHanhs = $baoHanhs ?? [];
-            Log::info($baoHanhs->toArray());
+            Log::info($baoHanhs ? $baoHanhs->toArray() : []);
             return view('result', compact('baoHanhs'));
         }
     }

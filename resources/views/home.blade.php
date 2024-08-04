@@ -135,6 +135,16 @@
                     <div class="relative">
                         <input 
                             type="text" 
+                            name="code" 
+                            placeholder="Mã bảo hành" 
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
+                            required 
+                        >
+                    </div>
+
+                    <div class="relative">
+                        <input 
+                            type="text" 
                             name="phone" 
                             placeholder="Số điện thoại" 
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
