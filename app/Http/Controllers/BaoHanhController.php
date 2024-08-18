@@ -122,7 +122,7 @@ class BaoHanhController extends Controller
         try {
             $request->validate([
                 'user_name' => 'required',
-                'code' => 'required',
+                'code' => 'nullable',
                 'phone' => 'required',
                 // 'email' => 'nullable | email',
                 'product_name' => 'required | exists:products,name',
