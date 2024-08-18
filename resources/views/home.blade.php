@@ -132,14 +132,15 @@
                         <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
-                    <div class="relative">
+                    <!-- <div class="relative">
                         <input 
                             type="text" 
                             name="code" 
                             placeholder="Mã bảo hành" 
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
+                            required 
                         >
-                    </div>
+                    </div> -->
 
                     <div class="relative">
                         <input 
