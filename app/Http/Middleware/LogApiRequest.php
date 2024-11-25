@@ -16,9 +16,7 @@ class LogApiRequest
      */
     public function handle(Request $request, Closure $next): Response
     {
-	// Tiếp tục xử lý yêu cầu
-	$response = $next($request);
-        //return $response;
+	    $response = $next($request);
 
         // Ghi log vào database
         DB::table('api_logs')->insert([
