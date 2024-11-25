@@ -10,18 +10,13 @@ use Spatie\SimpleExcel\SimpleExcelReader;
 use App\Models\WarrantyType;
 class BaoHanhController extends Controller
 {
-    //
-
     public function syncBaohanhToSheet(Request $request)
     {
         $lastUpdated = Carbon::parse($request->lastUpdated ?? '2021-01-01 00:00:00');
         $baoHanhs = BaoHanh::where('created_at', '>', $lastUpdated)->orderBy('created_at', 'desc')->get();
-        Log::info('Now: ' . now() . ' Last Updated: ' . $lastUpdated);
-//        Log::info('Found ' . $baoHanhs->count() . ' new baohanh');
-//        Log::info($baoHanhs);
-	return response()->json([
-	    'oldLastUpdated' => $lastUpdated,
-            'lastUpdated' => now(),
+	    return response()->json([
+	        //'oldLastUpdated' => $lastUpdated,
+            'lastUpdated' => now()->format('Y-m-d H:i:s'),
             'baoHanhs' => $baoHanhs
         ]);
     }
