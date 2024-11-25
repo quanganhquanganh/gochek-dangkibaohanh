@@ -1,7 +1,7 @@
 {
     "name": "laravel-app",
     "script": "artisan",
-    "args": ["serve", "--port=8005"],
+    "args": ["serve", "--host=0.0.0.0", "--port=8005"],
     "watch": false,
     "interpreter": "php"
 }
