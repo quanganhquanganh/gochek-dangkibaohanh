@@ -13,11 +13,18 @@ class BaoHanhController extends Controller
     public function syncBaohanhToSheet(Request $request)
     {
         $lastUpdated = Carbon::parse($request->lastUpdated ?? '2021-01-01 00:00:00');
-        $baoHanhs = BaoHanh::where('created_at', '>', $lastUpdated)->orderBy('created_at', 'desc')->get();
+        $limit = $request->limit;
+        $baoHanhs = BaoHanh::where('created_at', '>', $lastUpdated)
+            ->orderBy('created_at', 'desc')
+            ->when($limit, function ($query) use ($limit) {
+                return $query->limit($limit);
+            })
+            ->get();
 	    return response()->json([
 	        //'oldLastUpdated' => $lastUpdated,
             'lastUpdated' => now()->format('Y-m-d H:i:s'),
-            'baoHanhs' => $baoHanhs
+            'baoHanhs' => $baoHanhs,
+            'count' => $baoHanhs->count()
         ]);
     }
 
@@ -161,7 +168,7 @@ class BaoHanhController extends Controller
 
         // Kiểm tra nếu cả hai từ khóa tìm kiếm đều null
         if (!$request->filled('phone') && !$request->filled('warranty_code')) {
-           
+
         }
         // Nếu có ít nhất một trường tìm kiếm
         else {
