@@ -49,46 +49,46 @@
             </div>
         </div>
 
-        <div class="w-full h-px bg-[#36383f] mt-8 mb-8"></div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full mb-8">
-            <!-- Box 1 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208492/Gochek/1_otd9k1.jpg"
-                    alt="Image" class="w-full  object-cover">
-                <!-- <div class="p-4">
-                    <h3 class="text-lg font-bold text-black">Micro thu âm Gochek Ultra</h3>
-                </div> -->
-            </div>
-            <!-- Box 2 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/1_2_rjkf2j.jpg"
-                    alt="Image" class="w-full object-cover">
-            </div>
-            <!-- Box 3 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/03_ultra_plus_c%C3%B3_raphcn.jpg"
-                    alt="Image" class="w-full object-cover">
-            </div>
-            <!-- Box 4 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208488/Gochek/16_yfhopk.jpg"
-                    alt="Image" class="w-full object-cover">
-            </div>
-            <!-- Box 5 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/1_1_jhh8f3.jpg"
-                    alt="Image" class="w-full object-cover">
-            </div>
-            <!-- Box 6 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/47_ga0haf.png"
-                    alt="Image" class="w-full object-cover">
-            </div>
-            <!-- Box 7 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208486/Gochek/A3_abzy9e.jpg"
-                    alt="Image" class="w-full object-cover">
-            </div>
-        </div>
+{{--        <div class="w-full h-px bg-[#36383f] mt-8 mb-8"></div>--}}
+{{--        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full mb-8">--}}
+{{--            <!-- Box 1 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208492/Gochek/1_otd9k1.jpg"--}}
+{{--                    alt="Image" class="w-full  object-cover">--}}
+{{--                <!-- <div class="p-4">--}}
+{{--                    <h3 class="text-lg font-bold text-black">Micro thu âm Gochek Ultra</h3>--}}
+{{--                </div> -->--}}
+{{--            </div>--}}
+{{--            <!-- Box 2 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/1_2_rjkf2j.jpg"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--            <!-- Box 3 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/03_ultra_plus_c%C3%B3_raphcn.jpg"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--            <!-- Box 4 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208488/Gochek/16_yfhopk.jpg"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--            <!-- Box 5 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/1_1_jhh8f3.jpg"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--            <!-- Box 6 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/47_ga0haf.png"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--            <!-- Box 7 -->--}}
+{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
+{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208486/Gochek/A3_abzy9e.jpg"--}}
+{{--                    alt="Image" class="w-full object-cover">--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 </div>
