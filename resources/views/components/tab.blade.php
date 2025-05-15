@@ -1,5 +1,5 @@
 {{--Chuyen Tab --}}
-<div class="w-full bg-black text-white bg-no-repeat bg-contain lg:bg-auto"
+<div class="w-full bg-black text-white bg-no-repeat bg-cover"
 {{--     style="background-image: url('{{ asset('tab-bg.png') }}')">--}}
         style="background-image: url('https://test257-singapore.s3.ap-southeast-1.amazonaws.com/tab-bg.webp'); background-position: left bottom;">
     <div class="w-full lg:w-[960px] mx-auto py-5 lg:py-24">
