@@ -2,13 +2,6 @@
 <div class="w-full bg-black text-white bg-no-repeat bg-cover"
 {{--     style="background-image: url('{{ asset('tab-bg.png') }}')">--}}
         style="background-image: url('https://test257-singapore.s3.ap-southeast-1.amazonaws.com/tab-bg.webp'); background-position: left bottom;">
-    <style>
-        @media (min-width: 1024px) {
-            div[style*='background-image'] {
-                background-image: url('https://test257-singapore.s3.ap-southeast-1.amazonaws.com/tab-bg_large.webp') !important;
-            }
-        }
-    </style>
     <div class="w-full lg:w-[960px] mx-auto py-5 lg:py-24">
         <div class="text-2xl lg:text-[51px] font-bold text-center py-10">BẢO HÀNH ĐIỆN TỬ GOCHEK</div>
         <div class="px-16 md:px-0 flex flex-col md:flex-row text-lg justify-around font-bold">
