@@ -102,7 +102,7 @@
                 </div>
                 <!-- Box 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/gochecks100.jpg"
+                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/ultra24.jpg"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 3 -->
@@ -117,7 +117,7 @@
                 </div>
                 <!-- Box 5 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/ultra24.jpg"
+                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/gochecks100.jpg"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 6 -->
