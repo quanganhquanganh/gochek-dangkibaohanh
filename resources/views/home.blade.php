@@ -24,7 +24,7 @@
             select,
             .input-checkbox {
             -webkit-appearance: none;
-            } 
+            }
 
              /* Media query for mobile devices */
              @media (max-width: 768px) {
@@ -84,7 +84,7 @@
             }
 
 
-            
+
         </style>
         <script>
             $(document).ready(function() {
@@ -122,70 +122,70 @@
 
 
                     <div class="relative">
-                        <input 
-                            type="text" 
-                            name="user_name" 
-                            placeholder="Họ và tên" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
-                            required 
+                        <input
+                            type="text"
+                            name="user_name"
+                            placeholder="Họ và tên"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
+                            required
                         >
                         <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
                     <!-- <div class="relative">
-                        <input 
-                            type="text" 
-                            name="code" 
-                            placeholder="Mã bảo hành" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
-                            required 
+                        <input
+                            type="text"
+                            name="code"
+                            placeholder="Mã bảo hành"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
+                            required
                         >
                     </div> -->
 
                     <div class="relative">
-                        <input 
-                            type="text" 
-                            name="phone" 
-                            placeholder="Số điện thoại" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
+                        <input
+                            type="text"
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                             required
-                            minlength="10" 
-                            maxlength="11" 
+                            minlength="10"
+                            maxlength="11"
                             pattern="[0-9]+"
                         >
                         <!-- <span class="absolute inset-y-0 left-0 flex items-center pl-2 text-red-500">*</span> -->
                     </div>
 
                     <!-- <div class="relative">
-                        <input 
-                            type="email" 
-                            name="email" 
-                            placeholder="Email" 
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                         >
                     </div> -->
 
-                    <!-- <input 
-                            type="text" 
-                            id="date_of_birth" 
-                            name="date_of_birth" 
-                            placeholder="Ngày sinh" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
+                    <!-- <input
+                            type="text"
+                            id="date_of_birth"
+                            name="date_of_birth"
+                            placeholder="Ngày sinh"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                         >
 
-                    <input 
-                            type="text" 
-                            name="device" 
-                            placeholder="Thiết bị (điện thoại/máy tính) đang sử dụng (ví dụ iphone 14)" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white custom-placeholder" 
+                    <input
+                            type="text"
+                            name="device"
+                            placeholder="Thiết bị (điện thoại/máy tính) đang sử dụng (ví dụ iphone 14)"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white custom-placeholder"
                             maxlength="50"
                         > -->
 
                     <div class="relative">
-                        <select 
-                            name="product_name" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
-                            required 
+                        <select
+                            name="product_name"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
+                            required
                         >
                             <option value="" selected disabled
                             >Tên sản phẩm</option>
@@ -197,10 +197,10 @@
                     </div>
 
                     <div class="relative">
-                        <select 
-                            name="store_name" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
-                            required 
+                        <select
+                            name="store_name"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
+                            required
                         >
                             <option value="" selected disabled>Nơi mua</option>
                             <option value="Cửa hàng Đại lý Ủy quyền">Mua trực tiếp tại cửa hàng</option>
@@ -214,19 +214,19 @@
                     </div>
 
                     <!-- <div class="relative">
-                        <input 
-                            name="purpose_of_use" 
-                            placeholder="Mục đích sử dụng" 
+                        <input
+                            name="purpose_of_use"
+                            placeholder="Mục đích sử dụng"
                             class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
                             maxlength="50"
-                        > 
+                        >
                     </div> -->
 
                     <div class="relative">
-                        <select 
-                            name="need_help" 
-                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white" 
-                            required 
+                        <select
+                            name="need_help"
+                            class="w-full pl-5 px-3 py-1 md:py-3 my-2 bg-white"
+                            required
                         >
                             <option value="" selected disabled>Hiện tại bạn có cần hỗ trợ ngay không?</option>
                             <option value="Có, tôi muốn được gọi điện hỗ trợ ngay">Có, tôi muốn được gọi điện hỗ trợ ngay</option>
@@ -244,7 +244,7 @@
                         </button>
                         <a href="https://zalo.me/2224917289255900596" class="bg-white px-3 py-1 text-[rgb(23, 23, 23)] font-bold rounded-full pulse flex items-center justify-between" target="_blank">
                             <span class="hidden sm:block">Hỗ trợ ngay</span>
-                            <img src="https://toyotatancangsaigon.vn/wp-content/uploads/2019/08/zalo-icon.png" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
+                            <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/mess-icon.svg" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
                         </a>
                     </div>
                 </form>
