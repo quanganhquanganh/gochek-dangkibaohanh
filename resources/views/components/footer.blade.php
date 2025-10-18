@@ -92,13 +92,18 @@
 {{--        </div>--}}
             <div class="w-full h-px bg-[#36383f] mt-8 mb-8"></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full mb-8">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/livepro-g1.png"
+                         alt="Image" class="w-full  object-cover">
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/spacexs-1000.png"
+                         alt="Image" class="w-full  object-cover">
+                </div>
                 <!-- Box 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
                     <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/gocheck23mic.jpg"
                          alt="Image" class="w-full  object-cover">
-                    <!-- <div class="p-4">
-                        <h3 class="text-lg font-bold text-black">Micro thu âm Gochek Ultra</h3>
-                    </div> -->
                 </div>
                 <!-- Box 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
