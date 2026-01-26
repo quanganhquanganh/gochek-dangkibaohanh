@@ -1,0 +1,62 @@
+[
+    {
+        "id": 3,
+        "name": "Tai nghe E1000",
+        "created_at": "2024-03-31T07:31:06.000000Z",
+        "updated_at": "2024-03-31T07:31:06.000000Z"
+    },
+    {
+        "id": 5,
+        "name": "Gậy chụp ảnh SS100",
+        "created_at": "2024-03-31T07:31:06.000000Z",
+        "updated_at": "2024-03-31T07:31:06.000000Z"
+    },
+    {
+        "id": 9,
+        "name": "Micro S24 Ultra",
+        "created_at": "2024-05-20T01:55:23.000000Z",
+        "updated_at": "2024-05-20T01:55:23.000000Z"
+    },
+    {
+        "id": 10,
+        "name": "Micro karaoke GoChek HH24",
+        "created_at": "2024-09-06T09:40:10.000000Z",
+        "updated_at": "2024-09-06T09:40:10.000000Z"
+    },
+    {
+        "id": 11,
+        "name": "GoChek S23",
+        "created_at": "2024-12-26T14:16:34.000000Z",
+        "updated_at": "2024-12-26T14:16:34.000000Z"
+    },
+    {
+        "id": 12,
+        "name": "Tai nghe SpaceX E1000",
+        "created_at": "2025-10-18T07:37:01.000000Z",
+        "updated_at": "2025-10-18T07:37:01.000000Z"
+    },
+    {
+        "id": 13,
+        "name": "Tai nghe SpaceX S-1000",
+        "created_at": "2025-10-18T07:37:01.000000Z",
+        "updated_at": "2025-10-18T07:37:01.000000Z"
+    },
+    {
+        "id": 14,
+        "name": "Micro LivePro G1",
+        "created_at": "2025-10-18T07:37:01.000000Z",
+        "updated_at": "2025-10-18T07:37:01.000000Z"
+    },
+    {
+        "id": 15,
+        "name": "GoChek S25",
+        "created_at": "2025-10-18T07:37:01.000000Z",
+        "updated_at": "2025-10-18T07:37:01.000000Z"
+    },
+    {
+        "id": 16,
+        "name": "Micro GoChek Ultra Plus",
+        "created_at": "2025-10-19T20:46:22.000000Z",
+        "updated_at": "2025-10-19T20:46:22.000000Z"
+    }
+]
