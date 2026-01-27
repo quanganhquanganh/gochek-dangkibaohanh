@@ -137,19 +137,27 @@ class ImportDataCommand extends Command
                 $this->info("Truncated baohanhs table");
             }
 
-            $bar = $this->output->createProgressBar(count($data));
+            $batchSize = 500;
+            $totalBaohanhs = count($data);
+            $bar = $this->output->createProgressBar($totalBaohanhs);
             $bar->start();
 
-            foreach ($data as $item) {
-                BaoHanh::updateOrCreate(
-                    ['id' => $item['id']],
-                    $item
+            // Chia data thành batch và insert hàng loạt
+            for ($i = 0; $i < $totalBaohanhs; $i += $batchSize) {
+                $batch = array_slice($data, $i, $batchSize);
+                
+                // Dùng upsert để insert hoặc update nếu ID tồn tại
+                BaoHanh::upsert(
+                    $batch,
+                    ['id'], // unique key (Primary Key)
+                    array_keys(reset($batch)) // columns to update
                 );
-                $bar->advance();
+
+                $bar->advance(count($batch));
             }
 
             $bar->finish();
-            $this->info("\n✓ Imported " . count($data) . " baohanhs");
+            $this->info("\n✓ Imported " . $totalBaohanhs . " baohanhs");
         } catch (\Exception $e) {
             $this->error("\n✗ Error importing baohanhs: " . $e->getMessage());
         }
