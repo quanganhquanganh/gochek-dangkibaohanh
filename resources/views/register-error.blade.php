@@ -19,7 +19,7 @@
             <div class="text-[15px] text-center">
                 Quý khách vui lòng liên hệ hotline:
                 <strong>
-                    097 702 1884
+                    037 235 4208
                 </strong>
                 hoặc
                 <strong>

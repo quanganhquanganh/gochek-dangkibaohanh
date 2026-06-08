@@ -21,12 +21,14 @@
                 ])
                 <span class="ml-2">Cửa hàng Đại lý Ủy quyền: 501 Nguyễn Trãi, Thanh Xuân Nam, Thanh Xuân, Hà Nội</span>
             </div>
+            {{--
             <div class="mt-3 flex items-center">
                 @include('components.icon.phone', ['fill' => '#fff'])
                 <span class="ml-3">Hotline:
-                    <a href="tel:0977021884" class="underline">097 702 1884</a>
+                    <a href="tel:0977021884" class="underline">037 235 4208</a>
                 </span>
             </div>
+            --}}
             <div class="mt-3 flex items-center">
                 @include('components.icon.email', ['fill' => '#fff'])
                 <span class="ml-3">Email:
@@ -48,93 +50,51 @@
                 </span>
             </div>
         </div>
-
-{{--        <div class="w-full h-px bg-[#36383f] mt-8 mb-8"></div>--}}
-{{--        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full mb-8">--}}
-{{--            <!-- Box 1 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208492/Gochek/1_otd9k1.jpg"--}}
-{{--                    alt="Image" class="w-full  object-cover">--}}
-{{--                <!-- <div class="p-4">--}}
-{{--                    <h3 class="text-lg font-bold text-black">Micro thu âm Gochek Ultra</h3>--}}
-{{--                </div> -->--}}
-{{--            </div>--}}
-{{--            <!-- Box 2 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/1_2_rjkf2j.jpg"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--            <!-- Box 3 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208490/Gochek/03_ultra_plus_c%C3%B3_raphcn.jpg"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--            <!-- Box 4 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208488/Gochek/16_yfhopk.jpg"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--            <!-- Box 5 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/1_1_jhh8f3.jpg"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--            <!-- Box 6 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208487/Gochek/47_ga0haf.png"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--            <!-- Box 7 -->--}}
-{{--            <div class="bg-white rounded-lg shadow-md overflow-hidden">--}}
-{{--                <img src="https://res.cloudinary.com/kien-save-img/image/upload/v1718208486/Gochek/A3_abzy9e.jpg"--}}
-{{--                    alt="Image" class="w-full object-cover">--}}
-{{--            </div>--}}
-{{--        </div>--}}
             <div class="w-full h-px bg-[#36383f] mt-8 mb-8"></div>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 w-full mb-8">
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/livepro-g1.png"
+                    <img src="{{ asset('products/livepro-g1.png') }}"
                          alt="Image" class="w-full  object-cover">
                 </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/spacexs-1000.png"
+                <!-- <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ asset('products/spacexs-1000.png') }}"
                          alt="Image" class="w-full  object-cover">
-                </div>
+                </div> -->
                 <!-- Box 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/gocheck23mic.jpg"
+                    <img src="{{ asset('products/gochekultras25.png') }}"
                          alt="Image" class="w-full  object-cover">
                 </div>
                 <!-- Box 2 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/ultra24.jpg"
+                    <img src="{{ asset('products/ultra24.jpg') }}"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/hh24.jpg"
+                <!-- <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ asset('products/hh24.webp') }}"
                          alt="Image" class="w-full object-cover">
-                </div>
+                </div> -->
                 <!-- Box 4 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/tainghespacex.jpg"
+                    <img src="{{ asset('products/tainghespacex.jpg ') }}"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 5 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/gochecks100.jpg"
+                    <img src="{{ asset('products/gocheks100.jpg') }}"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 6 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/ultraplus.jpg"
+                    <img src="{{ asset('products/ultraplus.jpg') }}"
                          alt="Image" class="w-full object-cover">
                 </div>
                 <!-- Box 7 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/products/cusaca9.jpg"
+                <!-- <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="{{ asset('products/cusaca9.webp') }}"
                          alt="Image" class="w-full object-cover">
-                </div>
+                </div> -->
             </div>
     </div>
 </div>

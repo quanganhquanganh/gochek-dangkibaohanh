@@ -244,7 +244,8 @@
                         </button>
                         <a href="https://zalo.me/2224917289255900596" class="bg-white px-3 py-1 text-[rgb(23, 23, 23)] font-bold rounded-full pulse flex items-center justify-between" target="_blank">
                             <span class="hidden sm:block">Hỗ trợ ngay</span>
-                            <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/mess-icon.svg" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
+                            <img src="{{ asset('mess-icon.svg') }}" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" />
+                            <!-- <img src="https://test257-singapore.s3.ap-southeast-1.amazonaws.com/mess-icon.svg" class="sm:ml-3 w-[40px] h-[40px]" alt="Messenger Icon" /> -->
                         </a>
                     </div>
                 </form>
