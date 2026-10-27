@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BaoHanh;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Spatie\SimpleExcel\SimpleExcelReader;
 use App\Models\WarrantyType;
@@ -148,7 +149,33 @@ class BaoHanhController extends Controller
                 'date_of_birth',
                 'device',
                 'purpose_of_use',
-            ]));
+	    ]));
+
+	    // Dual-write sang Hono mới (non-blocking)
+            try {
+		$response = Http::asForm()->withHeaders([
+                    'X-API-Key' => env('GOCHEK_API_KEY'),
+		])->post('https://gochek-baohanh.kien2572001-ntk.workers.dev/api/baohanh', $request->all());
+
+                if ($response->successful()) {
+                    Log::info('Dual-write thành công', [
+                        'phone' => $request->phone,
+                        'hono_id' => $response->json('id'),
+                    ]);
+                } else {
+                    Log::warning('Dual-write thất bại', [
+                        'phone' => $request->phone,
+                        'status' => $response->status(),
+                        'body' => $response->body(),
+                    ]);
+                }
+            } catch (\Exception $e) {
+                Log::warning('Dual-write lỗi kết nối: ' . $e->getMessage(), [
+                    'phone' => $request->phone,
+                ]);
+            }
+		
+
             return view('success');
         }
         catch (\Exception $e) {
